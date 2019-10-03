@@ -2,4 +2,7 @@
     <string name="app_name">A.Art</string>
     <string name="mainList">List</string>
     <string name="camView">Camera</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

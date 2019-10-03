@@ -3,10 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/startFragment">
+    app:startDestination="@id/signUpFragment">
     <fragment
-        android:id="@+id/startFragment"
-        android:name="com.dne.aart.startFragment"
-        android:label="fragment_start"
-        tools:layout="@layout/fragment_start" />
+        android:id="@+id/signUpFragment"
+        android:name="com.dne.aart.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" />
+    <fragment
+        android:id="@+id/exhibitionListFragment"
+        android:name="com.dne.aart.ExhibitionListFragment"
+        android:label="fragment_exhibition_list"
+        tools:layout="@layout/fragment_exhibition_list" />
 </navigation>
