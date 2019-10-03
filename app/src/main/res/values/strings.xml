@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">A.Art</string>
+    <string name="mainList">List</string>
+    <string name="camView">Camera</string>
 </resources>
