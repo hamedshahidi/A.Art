@@ -1,0 +1,71 @@
+{
+  "all_expos": [
+    {
+      "id": 1,
+      "title": "first expo",
+      "info": "some info here",
+      "image_url": "http://expo_image_url",
+      "location": [
+        {
+          "lat": 63.87,
+          "long": 23.45
+        }
+      ],
+      "models": [
+        {
+          "id": 1,
+          "title": "model one title",
+          "info": "model one info",
+          "image_url": "http://model_image_url",
+          "model_file": "address of the model file",
+          "audio": "address for audio",
+          "score": 0,
+          "cloud_anchor_id": "cloudAnchorId"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "second expo",
+      "info": "some info here",
+      "image_url": "http://expo_image_url",
+      "location": [
+        {
+          "lat": 55.87,
+          "long": 33.45
+        }
+      ],
+      "models": [
+        {
+          "id": 1,
+          "title": "model one title",
+          "info": "model one info",
+          "image_url": "http://model_image_url",
+          "model_file": "address of the model file",
+          "audio": "address for audio",
+          "score": 0,
+          "cloud_anchor_id": "cloudAnchorId"
+        },
+        {
+          "id": 2,
+          "title": "model two title",
+          "info": "model one info",
+          "image_url": "http://model_image_url",
+          "model_file": "address of the model file",
+          "audio": "address for audio",
+          "score": 0,
+          "cloud_anchor_id": "cloudAnchorId"
+        },
+        {
+          "id": 2,
+          "title": "asmjsad",
+          "array": [
+            {
+              "id": {}
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
