@@ -55,15 +55,6 @@
           "audio": "address for audio",
           "score": 0,
           "cloud_anchor_id": "cloudAnchorId"
-        },
-        {
-          "id": 2,
-          "title": "asmjsad",
-          "array": [
-            {
-              "id": {}
-            }
-          ]
         }
       ]
     }
