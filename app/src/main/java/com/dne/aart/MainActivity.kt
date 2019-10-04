@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
 
         when (checkSignedIn()) {
-            true -> findNavController(R.id.nav_host_fragment).navigate(R.id.exhibitionListFragment)
+            true -> findNavController(R.id.nav_host_fragment).navigate(R.id.expoListFragment)
             false -> {
                 // Hide bottom nav bar if user is not signed in
                 bottom_nav_view.visibility = GONE
@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Checks if the user is signed in (for navigation purposes)
     private fun checkSignedIn(): Boolean {
         //TODO() check shared preferences for username. Return true if find one.
         return true

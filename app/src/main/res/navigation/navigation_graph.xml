@@ -8,10 +8,60 @@
         android:id="@+id/signUpFragment"
         android:name="com.dne.aart.SignUpFragment"
         android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" />
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_expoListFragment"
+            app:destination="@id/expoListFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/exhibitionListFragment"
-        android:name="com.dne.aart.ExhibitionListFragment"
-        android:label="fragment_exhibition_list"
-        tools:layout="@layout/fragment_exhibition_list" />
+        android:id="@+id/expoListFragment"
+        android:name="com.dne.aart.ExpoListFragment"
+        android:label="fragment_expo_list"
+        tools:layout="@layout/fragment_expo_list" >
+        <action
+            android:id="@+id/action_expoListFragment_to_expoInfoFragment"
+            app:destination="@id/expoInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/expoInfoFragment"
+        android:name="com.dne.aart.ExpoInfoFragment"
+        android:label="fragment_expo_info"
+        tools:layout="@layout/fragment_expo_info" >
+        <action
+            android:id="@+id/action_expoInfoFragment_to_mapViewFragment"
+            app:destination="@id/mapViewFragment" />
+        <action
+            android:id="@+id/action_expoInfoFragment_to_artListFragment"
+            app:destination="@id/artListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapViewFragment"
+        android:name="com.dne.aart.MapViewFragment"
+        android:label="fragment_map_view"
+        tools:layout="@layout/fragment_map_view" >
+        <action
+            android:id="@+id/action_mapViewFragment_to_expoInfoFragment"
+            app:destination="@id/expoInfoFragment" />
+        <action
+            android:id="@+id/action_mapViewFragment_to_artListFragment"
+            app:destination="@id/artListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/artListFragment"
+        android:name="com.dne.aart.ArtListFragment"
+        android:label="fragment_art_list"
+        tools:layout="@layout/fragment_art_list" >
+        <action
+            android:id="@+id/action_artListFragment_to_camSceneFragment"
+            app:destination="@id/camSceneFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/camSceneFragment"
+        android:name="com.dne.aart.CamSceneFragment"
+        android:label="fragment_cam_scene"
+        tools:layout="@layout/fragment_cam_scene" >
+        <action
+            android:id="@+id/action_camSceneFragment_to_artListFragment"
+            app:destination="@id/artListFragment" />
+    </fragment>
 </navigation>

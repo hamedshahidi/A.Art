@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_sign_up.view.*
 
 
-class ExhibitionListFragment : Fragment() {
+class ArtGridFragment : Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +22,7 @@ class ExhibitionListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_exhibition_list, container, false)
+        return inflater.inflate(R.layout.fragment_art_grid, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
