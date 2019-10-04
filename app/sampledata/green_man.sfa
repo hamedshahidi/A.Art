@@ -1,0 +1,107 @@
+{
+  animations: [
+    {
+      clips: [
+        {
+          name: 'Take 001',
+        },
+        {
+          name: 'mixamo.com',
+        },
+      ],
+      path: 'sampledata/green_man.fbx',
+    },
+  ],
+  materials: [
+    {
+      name: 'Alpha_Body_MAT',
+      parameters: [
+        {
+          baseColor: [
+            0.096570000000000003,
+            0.42161999999999999,
+            0.52200000000000002,
+            1,
+          ],
+        },
+        {
+          baseColorMap: null,
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+    {
+      name: 'Alpha_Joints_MAT',
+      parameters: [
+        {
+          baseColor: [
+            0.15355199999999999,
+            0.212894,
+            0.222217,
+            1,
+          ],
+        },
+        {
+          baseColorMap: null,
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+      'BoneIndices',
+      'BoneWeights',
+    ],
+    collision: {},
+    file: 'sampledata/green_man.fbx',
+    name: 'green_man',
+    recenter: 'root',
+  },
+  version: '0.54:2',
+}

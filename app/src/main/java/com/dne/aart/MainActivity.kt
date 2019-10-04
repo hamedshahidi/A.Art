@@ -38,6 +38,6 @@ class MainActivity : AppCompatActivity() {
     // Checks if the user is signed in (for navigation purposes)
     private fun checkSignedIn(): Boolean {
         //TODO() check shared preferences for username. Return true if find one.
-        return true
+        return false
     }
 }
