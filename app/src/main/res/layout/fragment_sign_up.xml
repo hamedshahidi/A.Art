@@ -1,16 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.SignUpFragment">
+    android:orientation="vertical"
+    android:gravity="center"
 
+
+    >
     <TextView
-        android:id="@+id/txt"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="SIGNUP FRAGMENT"
-        android:textSize="36sp" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/a_art"
+        android:textAlignment="center"
+        android:textSize="48sp"
+        android:textStyle="bold" />
 
-</FrameLayout>
+    <net.steamcrafted.materialiconlib.MaterialIconView
+        android:id="@+id/expandMap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="12dp"
+        app:materialIcon="camera_burst"
+        app:materialIconColor="#110B0B"
+        app:materialIconSize="40dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/usernameTextView"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/text_view_layout"
+            android:hint="Username"
+            android:paddingStart="15dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="8dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/colorAccent"
+            android:textSize="18sp" />
+
+
+        <Button
+            android:id="@+id/signupButton"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Sign In" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

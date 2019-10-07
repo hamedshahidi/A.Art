@@ -1,16 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".view.ExpoInfoFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <FrameLayout
+        android:id="@+id/mapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="EXPO INFO"
-        android:gravity="center"
-        android:textSize="36sp"/>
+        android:layout_height="250dp"
+        android:layout_weight="0.3"
+        android:background="#C1E43131">
 
-</FrameLayout>
+
+        <net.steamcrafted.materialiconlib.MaterialIconView
+            android:id="@+id/btn_expand_map"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="12dp"
+            app:materialIcon="arrow_expand_all"
+            app:materialIconColor="#110B0B"
+            app:materialIconSize="32dp" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_title_expoinfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Title Of Expo"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_weight="0.5"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_info_expoinfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/large_text"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_weight="0.2"
+        >
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="0.5"
+            android:text="@string/back" />
+
+        <Button
+            android:id="@+id/btn_select_model"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="0.5"
+            android:text="@string/select_model" />
+    </LinearLayout>
+
+</LinearLayout>

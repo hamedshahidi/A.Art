@@ -1,6 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <resources>
+
     <color name="colorPrimary">#008577</color>
+
     <color name="colorPrimaryDark">#00574B</color>
+
     <color name="colorAccent">#D81B60</color>
+
+    <color name="textWhite">#E6E6E6</color>
+
+    <color name="listBackground">#01579B</color>
+
+    <color name="white">#FFFFFF</color>
+
+    <color name="black">#000000</color>
+
+    <color name="textBlack">#DE000000</color>
+
+    <color name="textBlack2">#AB000000</color>
+
+    <color name="textBlack3">#99000000</color>
+
+    <color name="circleRed">#59FF0000</color>
+
 </resources>

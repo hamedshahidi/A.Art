@@ -20,30 +20,25 @@
         tools:layout="@layout/fragment_expo_list" >
         <action
             android:id="@+id/action_expoListFragment_to_expoInfoFragment"
-            app:destination="@id/expoInfoFragment" />
+            app:destination="@id/expoInfoFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
+        </action>
+
     </fragment>
     <fragment
         android:id="@+id/expoInfoFragment"
         android:name="com.dne.aart.view.ExpoInfoFragment"
         android:label="fragment_expo_info"
         tools:layout="@layout/fragment_expo_info" >
-        <action
-            android:id="@+id/action_expoInfoFragment_to_mapViewFragment"
-            app:destination="@id/mapViewFragment" />
+        <argument
+            android:name="expo_id"
+            android:defaultValue="0"
+            app:argType="integer" />
         <action
             android:id="@+id/action_expoInfoFragment_to_artListFragment"
-            app:destination="@id/artListFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/mapViewFragment"
-        android:name="com.dne.aart.view.MapViewFragment"
-        android:label="fragment_map_view"
-        tools:layout="@layout/fragment_map_view" >
-        <action
-            android:id="@+id/action_mapViewFragment_to_expoInfoFragment"
-            app:destination="@id/expoInfoFragment" />
-        <action
-            android:id="@+id/action_mapViewFragment_to_artListFragment"
             app:destination="@id/artListFragment" />
     </fragment>
     <fragment
@@ -51,9 +46,14 @@
         android:name="com.dne.aart.view.ArtListFragment"
         android:label="fragment_art_list"
         tools:layout="@layout/fragment_art_list" >
+        <argument
+            android:name="expo_id"
+            android:defaultValue="0"
+            app:argType="integer" />
         <action
             android:id="@+id/action_artListFragment_to_camSceneFragment"
             app:destination="@id/camSceneFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/camSceneFragment"

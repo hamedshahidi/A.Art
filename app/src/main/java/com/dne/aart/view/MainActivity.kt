@@ -1,15 +1,19 @@
 package com.dne.aart.view
 
+import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.View.GONE
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.navOptions
 import com.dne.aart.model.Database
 import com.dne.aart.R
 import com.dne.aart.util.DataManager
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.File
 
 const val TAG = "DBG"
 
@@ -21,12 +25,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+
+
+
         val host: NavHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment ?: return
         val navController = host.navController
 
         // Fills singleton with data from database
+
         DataManager.expoList = Database(applicationContext).allExpos
+
 
         // navigate to correct destination based on signed in status
         when (checkSignedIn()) {
@@ -43,6 +53,17 @@ class MainActivity : AppCompatActivity() {
     // Checks if the user is signed in (for navigation purposes)
     private fun checkSignedIn(): Boolean {
         //TODO() check shared preferences for username. Return true if find one.
-        return true
+        return false
+    }
+}
+
+object navOptions {
+    val options = navOptions {
+        anim {
+            enter = R.anim.slide_in_right
+            exit = R.anim.slide_out_left
+            popEnter = R.anim.slide_in_left
+            popExit = R.anim.slide_out_right
+        }
     }
 }

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import com.dne.aart.R
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_art_list.view.*
 import kotlinx.android.synthetic.main.fragment_sign_up.view.*
 
 
@@ -29,8 +30,8 @@ class CamSceneFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.txt.setOnClickListener {
+/*        view.txt.setOnClickListener {
             bottom_nav_view?.isVisible = false
-        }
+        }*/
     }
 }

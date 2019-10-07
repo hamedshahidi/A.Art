@@ -4,7 +4,7 @@
       "id": 1,
       "title": "first expo",
       "info": "some info here",
-      "image_url": "http://expo_image_url",
+      "image_url": "img1",
       "location": {
         "lat": 63.87,
         "long": 23.45
@@ -14,7 +14,7 @@
           "id": 1,
           "title": "model one title",
           "info": "model one info",
-          "image_url": "http://model_image_url",
+          "image_url": "img5",
           "model_file": "address of the model file",
           "audio": "address for audio",
           "score": 0,
@@ -26,7 +26,7 @@
       "id": 2,
       "title": "second expo",
       "info": "some info here",
-      "image_url": "http://expo_image_url",
+      "image_url": "img2",
       "location": {
         "lat": 55.87,
         "long": 33.45
@@ -36,7 +36,7 @@
           "id": 1,
           "title": "model one title",
           "info": "model one info",
-          "image_url": "http://model_image_url",
+          "image_url": "img3",
           "model_file": "address of the model file",
           "audio": "address for audio",
           "score": 0,
@@ -46,7 +46,7 @@
           "id": 2,
           "title": "model two title",
           "info": "model one info",
-          "image_url": "http://model_image_url",
+          "image_url": "img4",
           "model_file": "address of the model file",
           "audio": "address for audio",
           "score": 0,

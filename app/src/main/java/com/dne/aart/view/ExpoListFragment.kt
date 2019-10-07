@@ -36,7 +36,7 @@ class ExpoListFragment : Fragment() {
         // configuring the adapter for exhibitions list view
         linearLayoutManager = LinearLayoutManager(activity!!.applicationContext)
         rcv.layoutManager = linearLayoutManager
-        rcv.adapter = AdoptiveListAdapter(2)
+        rcv.adapter = AdoptiveListAdapter(context!!,null)
 
         // show divider between list items
         val dividerItemDecoration = DividerItemDecoration(
