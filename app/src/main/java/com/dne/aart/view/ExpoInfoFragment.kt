@@ -1,16 +1,14 @@
-package com.dne.aart
+package com.dne.aart.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_sign_up.view.*
+import com.dne.aart.R
 
 
-class MapViewFragment : Fragment() {
+class ExpoInfoFragment : Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,14 +20,10 @@ class MapViewFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_map_view, container, false)
+        return inflater.inflate(R.layout.fragment_expo_info, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        view.txt.setOnClickListener {
-            bottom_nav_view?.isVisible = false
-        }
     }
 }

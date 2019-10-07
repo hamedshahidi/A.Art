@@ -6,7 +6,7 @@
     app:startDestination="@id/signUpFragment">
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.dne.aart.SignUpFragment"
+        android:name="com.dne.aart.view.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/expoListFragment"
-        android:name="com.dne.aart.ExpoListFragment"
+        android:name="com.dne.aart.view.ExpoListFragment"
         android:label="fragment_expo_list"
         tools:layout="@layout/fragment_expo_list" >
         <action
@@ -24,7 +24,7 @@
     </fragment>
     <fragment
         android:id="@+id/expoInfoFragment"
-        android:name="com.dne.aart.ExpoInfoFragment"
+        android:name="com.dne.aart.view.ExpoInfoFragment"
         android:label="fragment_expo_info"
         tools:layout="@layout/fragment_expo_info" >
         <action
@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/mapViewFragment"
-        android:name="com.dne.aart.MapViewFragment"
+        android:name="com.dne.aart.view.MapViewFragment"
         android:label="fragment_map_view"
         tools:layout="@layout/fragment_map_view" >
         <action
@@ -48,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/artListFragment"
-        android:name="com.dne.aart.ArtListFragment"
+        android:name="com.dne.aart.view.ArtListFragment"
         android:label="fragment_art_list"
         tools:layout="@layout/fragment_art_list" >
         <action
@@ -57,7 +57,7 @@
     </fragment>
     <fragment
         android:id="@+id/camSceneFragment"
-        android:name="com.dne.aart.CamSceneFragment"
+        android:name="com.dne.aart.view.CamSceneFragment"
         android:label="fragment_cam_scene"
         tools:layout="@layout/fragment_cam_scene" >
         <action

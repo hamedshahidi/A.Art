@@ -1,13 +1,14 @@
-package com.dne.aart
+package com.dne.aart.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.dne.aart.R
 
 
-class ExpoInfoFragment : Fragment() {
+class ExpoListFragment : Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +20,7 @@ class ExpoInfoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_expo_info, container, false)
+        return inflater.inflate(R.layout.fragment_expo_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
