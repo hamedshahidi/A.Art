@@ -2,11 +2,13 @@ package com.dne.aart.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View.GONE
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.dne.aart.model.Database
 import com.dne.aart.R
+import com.dne.aart.util.DataManager
 import kotlinx.android.synthetic.main.activity_main.*
 
 const val TAG = "DBG"
@@ -22,7 +24,9 @@ class MainActivity : AppCompatActivity() {
         val host: NavHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment ?: return
         val navController = host.navController
-        val database = Database(applicationContext)
+
+        // Fills singleton with data from database
+        DataManager.expoList = Database(applicationContext).allExpos
 
         // navigate to correct destination based on signed in status
         when (checkSignedIn()) {
@@ -39,6 +43,6 @@ class MainActivity : AppCompatActivity() {
     // Checks if the user is signed in (for navigation purposes)
     private fun checkSignedIn(): Boolean {
         //TODO() check shared preferences for username. Return true if find one.
-        return false
+        return true
     }
 }

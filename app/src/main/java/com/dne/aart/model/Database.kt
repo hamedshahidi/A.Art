@@ -17,7 +17,6 @@ class Database(context: Context) {
 
     init {
         fetchData()
-        Log.d(TAG,allExpos.toString())
     }
 
     // Connect to database (read from local json file in this project)
@@ -33,7 +32,6 @@ class Database(context: Context) {
                 inStream.read(buffer)
                 inStream.close()
                 json = String(buffer, charset)
-
             }
         } catch (pokemon: IOException) {
             pokemon.printStackTrace()
@@ -115,6 +113,5 @@ class Database(context: Context) {
             cloud_anchor_id = modelCloudAnchorId
         )
     }
-
-    //rivate fun JSONArray.toMutableList(): MutableList<Any> = MutableList(length(), this::get)
+    //private fun JSONArray.toMutableList(): MutableList<Any> = MutableList(length(), this::get)
 }

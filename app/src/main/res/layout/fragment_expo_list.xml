@@ -6,12 +6,10 @@
     tools:context=".view.ExpoListFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="EXPO LIST"
-        android:textAlignment="center"
-        android:textSize="36sp" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>
