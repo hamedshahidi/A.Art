@@ -1,19 +1,17 @@
 package com.dne.aart.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import com.dne.aart.R
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_art_list.view.*
-import kotlinx.android.synthetic.main.fragment_sign_up.view.*
 
 
 class CamSceneFragment : Fragment() {
 
+    private var modelId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,8 +28,17 @@ class CamSceneFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-/*        view.txt.setOnClickListener {
-            bottom_nav_view?.isVisible = false
-        }*/
+        val fManager = childFragmentManager
+        //fragment = fManager.findFragmentById(R.id.ar_container)
+        try {
+            var fragment = fManager.findFragmentById(R.id.ar_fragment_container)
+            if (fragment == null) {
+                fragment = CloudAnchorFragment()
+                fManager.beginTransaction().add(R.id.ar_fragment_container, fragment).commit()
+
+            }
+        } catch (e: Exception){
+            Log.d("DBG", e.message)
+        }
     }
 }

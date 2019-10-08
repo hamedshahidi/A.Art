@@ -56,7 +56,9 @@
             app:argType="integer" />
         <action
             android:id="@+id/action_artListFragment_to_camSceneFragment"
-            app:destination="@id/camSceneFragment" />
+            app:destination="@id/camSceneFragment"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
 
     </fragment>
     <fragment
@@ -64,8 +66,14 @@
         android:name="com.dne.aart.view.CamSceneFragment"
         android:label="fragment_cam_scene"
         tools:layout="@layout/fragment_cam_scene" >
+        <argument
+            android:name="model_id"
+            android:defaultValue="0"
+            app:argType="integer" />
         <action
             android:id="@+id/action_camSceneFragment_to_artListFragment"
-            app:destination="@id/artListFragment" />
+            app:destination="@id/artListFragment"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
 </navigation>

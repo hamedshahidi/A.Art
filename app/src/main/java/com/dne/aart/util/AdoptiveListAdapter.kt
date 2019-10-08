@@ -12,6 +12,7 @@ import android.widget.LinearLayout
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.dne.aart.R
+import com.dne.aart.view.ArtListFragmentDirections
 import com.dne.aart.view.ExpoListFragmentDirections
 import com.dne.aart.view.TAG
 import kotlinx.android.synthetic.main.list_item_art.view.*
@@ -68,8 +69,18 @@ class AdoptiveListAdapter(context: Context, expoId: Int?) : RecyclerView.Adapter
             Log.d(TAG,"models.size: ${thisExpo.models.size}")
             holder.view.tv_model_name.text = model.title
             holder.view.tv_model_info.text = model.info
-            val imgPath = Uri.parse("android.resource://com.dne.aart/drawable/" + model.image_url)
+            val imgPath = Uri.parse("android.resource://com.dne.aart/drawable/"
+                    + model.image_url)
             holder.view.imgv_model.setImageURI(imgPath)
+            val modelIdArg = model.id
+            val cellContainer =
+                holder.view.findViewById<LinearLayout>(R.id.expo_cell_container)
+            cellContainer.setOnClickListener {
+                val action =
+                    ArtListFragmentDirections.actionArtListFragmentToCamSceneFragment()
+                action.modelId = model.id
+                holder.view.findNavController().navigate(action)
+            }
         }
     }
 }
