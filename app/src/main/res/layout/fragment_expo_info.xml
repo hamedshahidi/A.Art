@@ -8,12 +8,16 @@
     tools:context=".view.ExpoInfoFragment">
 
     <FrameLayout
-        android:id="@+id/mapFragment"
+        android:id="@+id/mapContainer"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_weight="0.3"
-        android:background="#C1E43131">
+        android:layout_weight="0.3">
 
+        <fragment
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:id="@+id/mapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
         <net.steamcrafted.materialiconlib.MaterialIconView
             android:id="@+id/btn_expand_map"

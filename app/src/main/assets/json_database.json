@@ -6,8 +6,8 @@
       "info": "some info here",
       "image_url": "img1",
       "location": {
-        "lat": 63.87,
-        "long": 23.45
+        "lat": 60.258925,
+        "long": 24.844798
       },
       "models": [
         {
@@ -28,8 +28,8 @@
       "info": "some info here",
       "image_url": "img2",
       "location": {
-        "lat": 55.87,
-        "long": 33.45
+        "lat": 60.1861,
+        "long": 24.8224
       },
       "models": [
         {
