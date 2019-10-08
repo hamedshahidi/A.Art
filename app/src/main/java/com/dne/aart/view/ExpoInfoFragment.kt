@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.dne.aart.MapsActivity
 import com.dne.aart.util.DataManager
 import kotlinx.android.synthetic.main.fragment_expo_info.*
 import com.google.android.gms.maps.SupportMapFragment
@@ -60,11 +59,13 @@ class ExpoInfoFragment : Fragment() {
 
             val marker = MarkerOptions()
                 .position(LatLng(lat, lon))
-                .title(expo.title)
+
+            // Disables the default actions on marker click
             mMap.setOnMarkerClickListener {
-                false
+                true
             }
-            mMap.addMarker(marker).showInfoWindow()
+
+            mMap.addMarker(marker)
         }
         // ==================== MAP END =======================
 

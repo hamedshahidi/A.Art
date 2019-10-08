@@ -1,17 +1,6 @@
-
 package com.dne.aart.view
 
-/*
 
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.core.view.isVisible
-import com.dne.aart.R
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_art_list.view.*
-import kotlinx.android.synthetic.main.fragment_sign_up.view.*
 import android.app.Activity
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -31,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.dne.aart.R
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.google.android.gms.common.api.ResolvableApiException
@@ -44,9 +34,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import java.io.IOException
 
-
-class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
-
+class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     // Permission requests at runtime
     companion object {
@@ -63,9 +51,9 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
     private lateinit var map: GoogleMap
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var lastLocation: Location
-    private val testLat: Double = 60.259019
-    private val testLon: Double = 24.844419
-    private var testLocation = LatLng(testLat, testLon)
+    private var expoLat: Double? = null
+    private var expoLon: Double? = null
+    private lateinit var expoLocation: LatLng
     private var circleRadius: Double = 150.0
     private var userHasBeenNotifiedOfEvent = false
 
@@ -74,14 +62,18 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
         "%.${numberOfDecimals}f".format(this)
 
 
+    // ------------ ON CREATE ------------------
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_maps)
+
+        expoLocation = getExpoLocation(intent)
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(p0: LocationResult) {
                 super.onLocationResult(p0)
@@ -97,20 +89,23 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
                 )
 
 
+               // Log.d("DBG",expoLat.toString() +" " + expoLon.toString())
+
+
                 // Calculate the distance between us an another point
                 val loc1 = Location("")
                 loc1.latitude = lastLocation.latitude
                 loc1.longitude = lastLocation.longitude
 
                 val loc2 = Location("")
-                loc2.latitude = testLat
-                loc2.longitude = testLon
+                loc2.latitude = expoLat!!
+                loc2.longitude = expoLon!!
 
                 val distanceInMeters = loc1.distanceTo(loc2)
                 var distanceInKm = (distanceInMeters / 1000.0f)
                 distanceInKm = distanceInKm.formatDecimal(2).toFloat()
 
-                val builder = NotificationCompat.Builder(this@MapViewFragment.context!!, CHANNEL_ID)
+                val builder = NotificationCompat.Builder(this@MapsActivity, CHANNEL_ID)
                     .setSmallIcon(R.drawable.bell)
                     .setContentTitle("My notification")
                     .setContentText("Much longer text that cannot fit one line...")
@@ -122,20 +117,27 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
                     .build()
                 createNotificationChannel()
 
-
                 // Check if user is in the radius and if he has been notified before, give him an notification about spot-of-interest
                 if (distanceInKm < 0.15 && !userHasBeenNotifiedOfEvent) {
-                    NotificationManagerCompat.from(this@MapViewFragment.context!!).notify(1, builder)
+                    NotificationManagerCompat.from(this@MapsActivity).notify(1, builder)
 
                     userHasBeenNotifiedOfEvent = true
                 }
-                Toast.makeText(this@MapViewFragment.context!!, "$distanceInKm Km", Toast.LENGTH_SHORT).show()
+                //TODO() show distance?!
+                Toast.makeText(this@MapsActivity, "$distanceInKm Km", Toast.LENGTH_SHORT).show()
             }
         }
         createLocationRequest()
     }
 
     override fun onMarkerClick(p0: Marker?) = false
+
+    private fun getExpoLocation(myIntent: Intent): LatLng{
+        expoLat = intent.getDoubleExtra("lat", 0.0)
+        expoLon = intent.getDoubleExtra("lon", 0.0)
+        val location = LatLng(expoLat ?: 0.0, expoLon ?: 0.0)
+        return location
+    }
 
     private fun createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
@@ -149,11 +151,20 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
             }
             // Register the channel with the system
             val notificationManager: NotificationManager =
-                activity!!.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
         }
     }
 
+    /**
+     * Manipulates the map once available.
+     * This callback is triggered when the map is ready to be used.
+     * This is where we can add markers or lines, add listeners or move the camera. In this case,
+     * we just add a marker near Sydney, Australia.
+     * If Google Play services is not installed on the device, the user will be prompted to install
+     * it inside the SupportMapFragment. This method will only be triggered once the user has
+     * installed Google Play services and returned to the app.
+     */
     override fun onMapReady(googleMap: GoogleMap) {
         this.map = googleMap
         map.uiSettings.isZoomControlsEnabled = true
@@ -175,15 +186,6 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
                 )
             }
         }
-        // Create a circle on the map at a certain point
-        val circle: Circle = map.addCircle(
-            CircleOptions()
-                .center(testLocation)
-                .radius(circleRadius)
-                .strokeColor(Color.BLUE)
-                .strokeWidth(1.5f)
-                .fillColor(activity!!.applicationContext.getColor(R.color.circleRed))
-        )
     }
 
     private fun setUpMap() {
@@ -206,7 +208,7 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
             if (location != null) {
                 lastLocation = location
                 val currentLatLng = LatLng(location.latitude, location.longitude)
-                placeMarkerOnMap(currentLatLng)
+                placeMarkerOnMap(expoLocation)
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12f))
             }
         }
@@ -214,13 +216,28 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
 
     private fun placeMarkerOnMap(testLoc: LatLng) {
         // 1
-        val markerOptions = MarkerOptions().position(testLocation)
+        //expoLocation = LatLng(expoLat ?: 0.0, expoLon ?: 0.0)
+        //val markerOptions = MarkerOptions().position(expoLocation)
+        val markerOptions = MarkerOptions().position(testLoc)
         // 2
         map.addMarker(markerOptions)
+
+        drawRadiusCircle()
     }
 
-    */
-/*private fun getAddress(latLng: LatLng): String {
+    private fun drawRadiusCircle(){
+        // Create a circle on the map at a certain point
+        val circleOptions  = CircleOptions()
+            .center(expoLocation)
+            .radius(circleRadius)
+            .strokeColor(Color.BLUE)
+            .strokeWidth(1.5f)
+            .fillColor(getColor(R.color.circleRed))
+
+        map.addCircle(circleOptions)
+    }
+
+    private fun getAddress(latLng: LatLng): String {
         // 1
         val geocoder = Geocoder(this)
         val addresses: List<Address>?
@@ -244,9 +261,7 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
         }
 
         return addressText
-    }*//*
-
-
+    }
 
     private fun startLocationUpdates() {
         //1
@@ -266,9 +281,7 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
         fusedLocationClient.requestLocationUpdates(
             locationRequest,
             locationCallback,
-            null */
-/* Looper *//*
-
+            null /* Looper */
         )
     }
 
@@ -302,7 +315,7 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
                     // Show the dialog by calling startResolutionForResult(),
                     // and check the result in onActivityResult().
                     e.startResolutionForResult(
-                        this@MapViewFragment.activity,
+                        this@MapsActivity,
                         REQUEST_CHECK_SETTINGS
                     )
                 } catch (sendEx: IntentSender.SendIntentException) {
@@ -312,8 +325,7 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
         }
     }
 
- */
-/*   // 1 TODO() maybe later?!
+    // 1 //TODO() maybe later?!
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CHECK_SETTINGS) {
@@ -327,12 +339,12 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
                 val place = getPlace(this, data)
                 var addressText = place.name.toString()
                 addressText += "\n" + place.address.toString()
+                Log.d("DBG",expoLat.toString() +" " + expoLon.toString())
 
                 placeMarkerOnMap(place.latLng)
             }
         }
-    }*//*
-
+    }
 
     // 2
     override fun onPause() {
@@ -348,23 +360,16 @@ class MapViewFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickL
         }
     }
 
-
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_map_view, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        view.txt.setOnClickListener {
-            bottom_nav_view?.isVisible = false
+    private fun loadPlacePicker() {
+        val builder = IntentBuilder()
+        try {
+            startActivityForResult(builder.build(this@MapsActivity),
+                PLACE_PICKER_REQUEST
+            )
+        } catch (e: GooglePlayServicesRepairableException) {
+            e.printStackTrace()
+        } catch (e: GooglePlayServicesNotAvailableException) {
+            e.printStackTrace()
         }
     }
 }
-*/

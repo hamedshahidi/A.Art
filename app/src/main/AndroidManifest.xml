@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
+
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true"/>
@@ -35,7 +36,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".view.MapsActivity"
             android:label="@string/title_activity_maps"></activity>
         <activity
             android:name=".view.MainActivity"
