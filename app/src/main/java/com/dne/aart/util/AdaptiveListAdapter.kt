@@ -108,7 +108,7 @@ class AdoptiveListAdapter(
         //view.imgv_expo.setImageURI(imgPath)
         view.tv_title_expo.text = expo.title
         val expoLocation: LatLng = LatLng(expo.location.lat, expo.location.long)
-        view.tv_distance_expo.text = LocationManager.getDistanceTo(expoLocation).toString()
+        view.tv_distance_expo.text = LocationManager.getDistanceTo(expoLocation).toString() + "Km away"
     }
 
     private fun populateCellWithModelData(view: View, model: Model, position: Int) {
