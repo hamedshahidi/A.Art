@@ -11,10 +11,20 @@
       },
       "models": [
         {
-          "id": 1,
-          "title": "model one title",
-          "info": "model one info",
-          "image_url": "img5",
+          "id": 3,
+          "title": "Deer",
+          "info": "ARTIST: sinork123",
+          "image_url": "deer_sc",
+          "model_file": "address of the model file",
+          "audio": "address for audio",
+          "score": 0,
+          "cloud_anchor_id": "ua-cc83da10b5004dab81d437934cac3958"
+        },
+        {
+          "id": 4,
+          "title": "Angel",
+          "info": "ARTIST: dalien",
+          "image_url": "angel_sc",
           "model_file": "address of the model file",
           "audio": "address for audio",
           "score": 0,
@@ -34,19 +44,19 @@
       "models": [
         {
           "id": 1,
-          "title": "model one title",
-          "info": "model one info",
-          "image_url": "img5",
+          "title": "Green man",
+          "info": "ARTIST: syncsketch",
+          "image_url": "guy_sc",
           "model_file": "address of the model file",
           "audio": "address for audio",
           "score": 0,
-          "cloud_anchor_id": "cloudAnchorId"
+          "cloud_anchor_id": "ua-cc83da10b5004dab81d437934cac3958"
         },
         {
           "id": 2,
-          "title": "model two title",
-          "info": "model two info",
-          "image_url": "img4",
+          "title": "Model Girl",
+          "info": "ARTIST: Freakz3d",
+          "image_url": "girl_sc",
           "model_file": "address of the model file",
           "audio": "address for audio",
           "score": 0,
@@ -66,19 +76,19 @@
       "models": [
         {
           "id": 1,
-          "title": "model one title",
-          "info": "model one info",
-          "image_url": "img5",
+          "title": "Green man",
+          "info": "ARTIST: syncsketch",
+          "image_url": "guy_sc",
           "model_file": "address of the model file",
           "audio": "address for audio",
           "score": 0,
-          "cloud_anchor_id": "cloudAnchorId"
+          "cloud_anchor_id": "ua-cc83da10b5004dab81d437934cac3958"
         },
         {
           "id": 2,
-          "title": "model two title",
-          "info": "model two info",
-          "image_url": "img4",
+          "title": "Model Girl",
+          "info": "ARTIST: Freakz3d",
+          "image_url": "girl_sc",
           "model_file": "address of the model file",
           "audio": "address for audio",
           "score": 0,
@@ -87,8 +97,38 @@
         {
           "id": 3,
           "title": "Deer",
-          "info": "model three info",
-          "image_url": "img6",
+          "info": "ARTIST: sinork123",
+          "image_url": "deer_sc",
+          "model_file": "address of the model file",
+          "audio": "address for audio",
+          "score": 0,
+          "cloud_anchor_id": "ua-cc83da10b5004dab81d437934cac3958"
+        },
+        {
+          "id": 4,
+          "title": "Angel",
+          "info": "ARTIST: dalien",
+          "image_url": "angel_sc",
+          "model_file": "address of the model file",
+          "audio": "address for audio",
+          "score": 0,
+          "cloud_anchor_id": "ua-cc83da10b5004dab81d437934cac3958"
+        },
+        {
+          "id": 5,
+          "title": "Tree",
+          "info": "ARTIST: wingedrobin",
+          "image_url": "tree_sc",
+          "model_file": "address of the model file",
+          "audio": "address for audio",
+          "score": 0,
+          "cloud_anchor_id": "ua-cc83da10b5004dab81d437934cac3958"
+        },
+        {
+          "id": 6,
+          "title": "Skull",
+          "info": "ARTIST: Sergey Egelsky",
+          "image_url": "skull_sc",
           "model_file": "address of the model file",
           "audio": "address for audio",
           "score": 0,
@@ -101,8 +141,8 @@
     {
       "id": 1,
       "title": "Green man",
-      "info": "model one info",
-      "image_url": "img3",
+      "info": "ARTIST: syncsketch",
+      "image_url": "guy_sc",
       "model_file": "address of the model file",
       "audio": "address for audio",
       "score": 0,
@@ -111,8 +151,8 @@
     {
       "id": 2,
       "title": "Model Girl",
-      "info": "model two info",
-      "image_url": "img4",
+      "info": "ARTIST: Freakz3d",
+      "image_url": "girl_sc",
       "model_file": "address of the model file",
       "audio": "address for audio",
       "score": 0,
@@ -121,8 +161,38 @@
     {
       "id": 3,
       "title": "Deer",
-      "info": "model three info",
-      "image_url": "img6",
+      "info": "ARTIST: sinork123",
+      "image_url": "deer_sc",
+      "model_file": "address of the model file",
+      "audio": "address for audio",
+      "score": 0,
+      "cloud_anchor_id": "ua-cc83da10b5004dab81d437934cac3958"
+    },
+    {
+      "id": 4,
+      "title": "Angel",
+      "info": "ARTIST: dalien",
+      "image_url": "angel_sc",
+      "model_file": "address of the model file",
+      "audio": "address for audio",
+      "score": 0,
+      "cloud_anchor_id": "ua-cc83da10b5004dab81d437934cac3958"
+    },
+    {
+      "id": 5,
+      "title": "Tree",
+      "info": "ARTIST: wingedrobin",
+      "image_url": "tree_sc",
+      "model_file": "address of the model file",
+      "audio": "address for audio",
+      "score": 0,
+      "cloud_anchor_id": "ua-cc83da10b5004dab81d437934cac3958"
+    },
+    {
+      "id": 6,
+      "title": "Skull",
+      "info": "ARTIST: Sergey Egelsky",
+      "image_url": "skull_sc",
       "model_file": "address of the model file",
       "audio": "address for audio",
       "score": 0,
