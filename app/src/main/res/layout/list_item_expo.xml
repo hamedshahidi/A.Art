@@ -21,12 +21,12 @@
         tools:srcCompat="@drawable/img8"
         android:contentDescription="@string/picture_of_model"
         android:gravity="center_horizontal"
-        android:scaleType="centerCrop" />
+        android:scaleType="fitXY" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/layoutBackground"
         android:gravity="center_vertical"
         android:padding="8dp"
 
@@ -73,6 +73,7 @@
             android:layout_gravity="center"
             android:layout_weight="0.2"
             android:text="@string/open"
+            android:contentDescription="@string/open_exhibition"
 
             />
 

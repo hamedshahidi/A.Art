@@ -279,6 +279,10 @@ public class CloudAnchorFragment extends ArFragment {
         switch (modelId){
             case 1: modelName ="green_man.sfb";break;
             case 2: modelName ="scene.sfb";break;
+            case 3: modelName = "deer_test.sfb";break;
+            case 4: modelName = "angel.sfb";break;
+            case 5: modelName = "tree.sfb";break;
+            case 6: modelName = "skull_two";break;
             default: modelName ="green_man.sfb";
         }
         Uri uriModel = Uri.parse(modelName);

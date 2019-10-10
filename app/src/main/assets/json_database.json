@@ -2,9 +2,9 @@
   "all_expos": [
     {
       "id": 1,
-      "title": "first expo",
-      "info": "some info here",
-      "image_url": "img1",
+      "title": "Helsinki University Expo",
+      "info": "Popup art expo",
+      "image_url": "helsinki_uni_white",
       "location": {
         "lat": 60.172806,
         "long": 24.951085
@@ -24,9 +24,9 @@
     },
     {
       "id": 2,
-      "title": "second expo",
-      "info": "some info here",
-      "image_url": "img2",
+      "title": "Aalto university expo",
+      "info": "Art student exhibition",
+      "image_url": "aalto_white",
       "location": {
         "lat": 60.1861,
         "long": 24.8224
@@ -36,7 +36,7 @@
           "id": 1,
           "title": "model one title",
           "info": "model one info",
-          "image_url": "img3",
+          "image_url": "img5",
           "model_file": "address of the model file",
           "audio": "address for audio",
           "score": 0,
@@ -47,6 +47,48 @@
           "title": "model two title",
           "info": "model two info",
           "image_url": "img4",
+          "model_file": "address of the model file",
+          "audio": "address for audio",
+          "score": 0,
+          "cloud_anchor_id": "cloudAnchorId"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Metropolia AR demo",
+      "info": "Student AR demo",
+      "image_url": "metropolia_white",
+      "location": {
+        "lat": 60.258810,
+        "long": 24.844730
+      },
+      "models": [
+        {
+          "id": 1,
+          "title": "model one title",
+          "info": "model one info",
+          "image_url": "img5",
+          "model_file": "address of the model file",
+          "audio": "address for audio",
+          "score": 0,
+          "cloud_anchor_id": "cloudAnchorId"
+        },
+        {
+          "id": 2,
+          "title": "model two title",
+          "info": "model two info",
+          "image_url": "img4",
+          "model_file": "address of the model file",
+          "audio": "address for audio",
+          "score": 0,
+          "cloud_anchor_id": "cloudAnchorId"
+        },
+        {
+          "id": 3,
+          "title": "model 3 title",
+          "info": "model 3 info",
+          "image_url": "img8",
           "model_file": "address of the model file",
           "audio": "address for audio",
           "score": 0,

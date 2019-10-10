@@ -1,0 +1,73 @@
+{
+  animations: [
+    {
+      clips: [
+        {
+          name: 'deer|Box001.001|Take 001|BaseLayer',
+        },
+        {
+          name: 'deer|Box001|Take 001|BaseLayer',
+        },
+        {
+          name: 'deer|deerAction',
+        },
+      ],
+      path: 'sampledata/deer_test.fbx',
+    },
+  ],
+  materials: [
+    {
+      name: 'Material #47.001',
+      parameters: [
+        {
+          baseColor: [
+            0,
+            0,
+            0,
+            1,
+          ],
+        },
+        {
+          baseColorMap: null,
+        },
+        {
+          normalMap: null,
+        },
+        {
+          interpolatedColor: null,
+        },
+        {
+          metallic: 0,
+        },
+        {
+          metallicMap: null,
+        },
+        {
+          roughness: 1,
+        },
+        {
+          roughnessMap: null,
+        },
+        {
+          opacity: null,
+        },
+      ],
+      source: 'build/sceneform_sdk/default_materials/fbx_material.sfm',
+    },
+  ],
+  model: {
+    attributes: [
+      'Position',
+      'TexCoord',
+      'Orientation',
+      'BoneIndices',
+      'BoneWeights',
+    ],
+    collision: {},
+    file: 'sampledata/deer_test.fbx',
+    name: 'deer_test',
+    recenter: 'root',
+    scale: 0.0027100000000000002,
+  },
+  version: '0.54:2',
+}

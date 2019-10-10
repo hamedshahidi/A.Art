@@ -76,3 +76,39 @@ sceneform.asset('sampledata/scene.gltf',
         'default',
         'sampledata/scene.sfa',
         'src/main/assets/scene')
+
+
+
+
+
+sceneform.asset('sampledata/lowpolydeer/deer.obj',
+        'default',
+        'sampledata/lowpolydeer/deer.sfa',
+        'src/main/assets/deer')
+
+sceneform.asset('sampledata/deer_test.fbx',
+        'default',
+        'sampledata/deer_test.sfa',
+        'src/main/assets/deer_test')
+
+sceneform.asset('sampledata/angel/angel.obj',
+        'default',
+        'sampledata/angel/angel.sfa',
+        'src/main/assets/angel')
+
+sceneform.asset('sampledata/tree/lowpolytree.obj',
+        'default',
+        'sampledata/tree/lowpolytree.sfa',
+        'src/main/assets/lowpolytree')
+
+
+
+sceneform.asset('sampledata/skull/skull_rotation.obj',
+        'default',
+        'sampledata/skull/skull_rotation.sfa',
+        'src/main/assets/skull_rotation')
+
+sceneform.asset('sampledata/skull/skull_two.obj',
+        'default',
+        'sampledata/skull/skull_two.sfa',
+        'src/main/assets/skull_two')
