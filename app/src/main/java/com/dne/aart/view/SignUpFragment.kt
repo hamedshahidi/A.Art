@@ -10,6 +10,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.dne.aart.R
@@ -80,8 +83,16 @@ class SignUpFragment : Fragment() {
             // if user is admin start cloud anchor hosting navigation route
             bundle = bundleOf("isAdmin" to isAdmin)
 
-            if (isAdmin) navigateToArtList()
-            else navigateToExpoList()
+            if (username.isEmpty() || username.isBlank()) {
+                Toast.makeText(this.context, "Please enter username", Toast.LENGTH_LONG).show()
+            } else {
+                usernameTextView.hideKeyboard()
+                if (isAdmin) navigateToArtList()
+                else navigateToExpoList()
+
+            }
+
+
         }
     }
 
@@ -91,6 +102,12 @@ class SignUpFragment : Fragment() {
 
     private fun navigateToExpoList() {
         findNavController().navigate(R.id.expoListFragment, bundle, navOptions.options)
+    }
+
+    // Hide the soft keyboard
+    private fun EditText.hideKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
     }
 
     private fun checkIfAdmin(): Boolean {

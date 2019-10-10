@@ -99,14 +99,14 @@ class AdoptiveListAdapter(
 
     @SuppressLint("SetTextI18n")
     private fun populateCellWithExpoData(view: View, expo: Expo) {
-        view.tv_info_expo.text = "info: " + expo.info
+        view.tv_info_expo.text = expo.info
         val imgId = context.resources.getIdentifier(
             expo.image_url, "drawable", context.packageName
         )
         view.imgv_expo.setImageResource(imgId)
         //val imgPath = Uri.parse("android.resource://com.dne.aart/drawable/" + expo.image_url)
         //view.imgv_expo.setImageURI(imgPath)
-        view.tv_title_expo.text = "title: " + expo.title
+        view.tv_title_expo.text = expo.title
     }
 
     private fun populateCellWithModelData(view: View, model: Model, position: Int) {
