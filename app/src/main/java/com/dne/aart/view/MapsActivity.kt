@@ -88,7 +88,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                     "LAT " + lastLocation.latitude.toString() + " LON " + lastLocation.longitude.toString()
                 )
 
-                val distanceInKm = LocationManager.getDictanceTo(expoLocation)
+                val distanceInKm = LocationManager.getDistanceTo(expoLocation)
 
                 val builder = NotificationCompat.Builder(this@MapsActivity, CHANNEL_ID)
                     .setSmallIcon(R.drawable.bell)
