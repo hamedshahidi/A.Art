@@ -3,7 +3,7 @@
     {
       "id": 1,
       "title": "Helsinki University Expo",
-      "info": "Popup art expo",
+      "info": "The Helsinki University proudly presents their very own 3d modeling expo. This is the first time in over 400 years that this big event has been hosted at this location. Don't let this opportunity slip you buy. Go and check out the great pieces.",
       "image_url": "helsinki_uni_white",
       "location": {
         "lat": 60.172806,
@@ -35,7 +35,7 @@
     {
       "id": 2,
       "title": "Aalto university expo",
-      "info": "Art student exhibition",
+      "info": "Aalto university is famous for their great artists and beautiful door handles. This display of AR models comes from their talented designers. Give your favourite model a like!",
       "image_url": "aalto_white",
       "location": {
         "lat": 60.179781,
@@ -67,7 +67,7 @@
     {
       "id": 3,
       "title": "Metropolia AR demo",
-      "info": "Student AR demo",
+      "info": "Metropolia is know throughout the galaxy as a great school, with sinking houses and talented people. Here you get a taste of the designers of the future. This AR experience is from the digital design students.",
       "image_url": "metropolia_white",
       "location": {
         "lat": 60.258810,
