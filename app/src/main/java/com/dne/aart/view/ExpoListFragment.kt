@@ -29,7 +29,7 @@ class ExpoListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        isAdmin = arguments!!.getBoolean("isAdmin")
+        if (arguments != null ) isAdmin = arguments!!.getBoolean("isAdmin")
         Log.d("DBGADMIN", "expolist admin: $isAdmin")
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_expo_list, container, false)

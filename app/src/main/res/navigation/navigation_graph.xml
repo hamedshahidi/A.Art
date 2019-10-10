@@ -29,6 +29,10 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right">
         </action>
+        <argument
+            android:name="isAdmin"
+            app:argType="boolean"
+            android:defaultValue="false" />
 
     </fragment>
     <fragment
@@ -49,7 +53,11 @@
             app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_expoInfoFragment_to_expoListFragment"
-            app:destination="@id/expoListFragment" />
+            app:destination="@id/expoListFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_in_right"
+            app:popEnterAnim="@anim/slide_out_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/artListFragment"

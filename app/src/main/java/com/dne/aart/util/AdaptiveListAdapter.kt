@@ -65,6 +65,7 @@ class AdoptiveListAdapter(
                 val action =
                     ExpoListFragmentDirections.actionExpoListFragmentToExpoInfoFragment()
                 action.expoId = expoIdArg
+
                 view.findNavController().navigate(action)
             }
 
