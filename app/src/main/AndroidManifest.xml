@@ -3,16 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.dne.aart">
 
-    <!--
-         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
-         Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality.
-    -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.CAMERA"/>
-
 
     <uses-feature
         android:name="android.hardware.camera.ar"
@@ -30,10 +24,6 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
-
         <activity
             android:name=".view.MapsActivity"
             android:label="@string/title_activity_maps"
@@ -46,14 +36,15 @@
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <meta-data android:name="com.google.ar.core" android:value="required" />
         <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+        <meta-data
             android:name="com.google.android.ar.API_KEY"
-            android:value="AIzaSyDH2S9_2MLhcKs2oN0c5EzZz-ivEdtD6aI"/>
+            android:value="@string/arcore_api_key"/>
     </application>
-
 </manifest>
