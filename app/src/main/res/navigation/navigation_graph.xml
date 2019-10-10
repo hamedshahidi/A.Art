@@ -47,6 +47,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_expoInfoFragment_to_expoListFragment"
+            app:destination="@id/expoListFragment" />
     </fragment>
     <fragment
         android:id="@+id/artListFragment"

@@ -41,7 +41,6 @@ class ExpoListFragment : Fragment() {
         // configuring the adapter for exhibitions list view
         linearLayoutManager = LinearLayoutManager(activity!!.applicationContext)
         rcv.layoutManager = linearLayoutManager
-        // TODO get admin!!
         rcv.adapter = AdoptiveListAdapter(context!!,null, isAdmin)
 
         // show divider between list items

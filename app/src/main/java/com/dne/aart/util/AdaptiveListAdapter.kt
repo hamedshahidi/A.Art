@@ -17,6 +17,7 @@ import com.dne.aart.model.Model
 import com.dne.aart.view.ArtListFragmentDirections
 import com.dne.aart.view.ExpoListFragmentDirections
 import com.dne.aart.view.TAG
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.list_item_art.view.*
 import kotlinx.android.synthetic.main.list_item_expo.view.*
 
@@ -52,7 +53,6 @@ class AdoptiveListAdapter(
     override fun onBindViewHolder(holder: Holder, position: Int) {
 
         val view = holder.view
-
 
         // If there is no exhibition id, show all exhibitions
         if (expoId == null) {
@@ -107,6 +107,8 @@ class AdoptiveListAdapter(
         //val imgPath = Uri.parse("android.resource://com.dne.aart/drawable/" + expo.image_url)
         //view.imgv_expo.setImageURI(imgPath)
         view.tv_title_expo.text = "title: " + expo.title
+        val expoLocation: LatLng = LatLng(expo.location.lat, expo.location.long)
+        view.tv_distance_expo.text = LocationManager.getDictanceTo(expoLocation).toString()
     }
 
     private fun populateCellWithModelData(view: View, model: Model, position: Int) {

@@ -250,19 +250,25 @@ public class CloudAnchorFragment extends ArFragment {
     }
 
     //dev
+    @SuppressLint("SetTextI18n")
     private synchronized void onResolvedAnchorAvailable2(Anchor anchor, String shortCode) {
         CloudAnchorState cloudState = anchor.getCloudAnchorState();
         if (cloudState == CloudAnchorState.SUCCESS) {
-            Toast.makeText(mHostActivity, "\"Cloud Anchor Resolved. Short code: \" + shortCode",
-                    Toast.LENGTH_SHORT).show();
+            tvInfo.setText("Cloud Anchor Resolved. Short code: " + shortCode);
+            /*Toast.makeText(mHostActivity, "\"Cloud Anchor Resolved. Short code: \" + shortCode",
+                    Toast.LENGTH_SHORT).show();*/
             setNewAnchor(anchor);
         } else {
-            Toast.makeText(mHostActivity,
+            tvInfo.setText("Error while resolving anchor with short code "
+                    + shortCode
+                    + ". Error: "
+                    + cloudState.toString());
+            /*Toast.makeText(mHostActivity,
                     "Error while resolving anchor with short code "
                             + shortCode
                             + ". Error: "
                             + cloudState.toString(),
-                    Toast.LENGTH_SHORT).show();
+                    Toast.LENGTH_SHORT).show();*/
 
             resolveButton.setEnabled(true);
         }

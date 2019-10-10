@@ -12,6 +12,7 @@ import androidx.navigation.navOptions
 import com.dne.aart.model.Database
 import com.dne.aart.R
 import com.dne.aart.util.DataManager
+import com.dne.aart.util.LocationManager
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 
@@ -34,6 +35,8 @@ class MainActivity : AppCompatActivity() {
         val navController = host.navController
 
         // Fills singleton with data from database
+
+        LocationManager.getLastLocation(this)
 
         DataManager.expoList = Database(applicationContext).allExpos
         DataManager.allModels = Database(applicationContext).allModels

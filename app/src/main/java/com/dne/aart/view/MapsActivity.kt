@@ -21,6 +21,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.dne.aart.R
+import com.dne.aart.util.LocationManager
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.google.android.gms.common.api.ResolvableApiException
@@ -57,9 +58,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     private var circleRadius: Double = 150.0
     private var userHasBeenNotifiedOfEvent = false
 
-    // Decimal Formatter
-    fun Float.formatDecimal(numberOfDecimals: Int = 2): String =
-        "%.${numberOfDecimals}f".format(this)
+
 
 
     // ------------ ON CREATE ------------------
@@ -75,6 +74,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         mapFragment.getMapAsync(this)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         locationCallback = object : LocationCallback() {
+
             override fun onLocationResult(p0: LocationResult) {
                 super.onLocationResult(p0)
                 lastLocation = p0.lastLocation
@@ -88,22 +88,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                     "LAT " + lastLocation.latitude.toString() + " LON " + lastLocation.longitude.toString()
                 )
 
-
-               // Log.d("DBG",expoLat.toString() +" " + expoLon.toString())
-
-
-                // Calculate the distance between us an another point
-                val loc1 = Location("")
-                loc1.latitude = lastLocation.latitude
-                loc1.longitude = lastLocation.longitude
-
-                val loc2 = Location("")
-                loc2.latitude = expoLat!!
-                loc2.longitude = expoLon!!
-
-                val distanceInMeters = loc1.distanceTo(loc2)
-                var distanceInKm = (distanceInMeters / 1000.0f)
-                distanceInKm = distanceInKm.formatDecimal(2).toFloat()
+                val distanceInKm = LocationManager.getDictanceTo(expoLocation)
 
                 val builder = NotificationCompat.Builder(this@MapsActivity, CHANNEL_ID)
                     .setSmallIcon(R.drawable.bell)
@@ -135,8 +120,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     private fun getExpoLocation(myIntent: Intent): LatLng{
         expoLat = intent.getDoubleExtra("lat", 0.0)
         expoLon = intent.getDoubleExtra("lon", 0.0)
-        val location = LatLng(expoLat ?: 0.0, expoLon ?: 0.0)
-        return location
+        return LatLng(expoLat ?: 0.0, expoLon ?: 0.0)
     }
 
     private fun createNotificationChannel() {
