@@ -70,3 +70,9 @@ sceneform.asset('sampledata/green_man.fbx',
         'default',
         'sampledata/green_man.sfa',
         'src/main/assets/green_man')
+
+
+sceneform.asset('sampledata/scene.gltf',
+        'default',
+        'sampledata/scene.sfa',
+        'src/main/assets/scene')

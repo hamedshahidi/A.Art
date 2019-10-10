@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         // Fills singleton with data from database
 
         DataManager.expoList = Database(applicationContext).allExpos
+        DataManager.allModels = Database(applicationContext).allModels
 
 
         // navigate to correct destination based on signed in status

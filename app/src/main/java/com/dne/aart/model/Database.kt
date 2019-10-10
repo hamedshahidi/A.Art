@@ -14,6 +14,7 @@ class Database(context: Context) {
 
     private val assetsManager: AssetManager = context.assets
     var allExpos = mutableListOf<Expo>()
+    var allModels = mutableListOf<Model>()
 
     init {
         fetchData()
@@ -46,6 +47,7 @@ class Database(context: Context) {
         val data = readJsonFromAssets()
         if (data != null) {
             allExpos = getAllExpos(data)
+            allModels = getAllModels(data)
         }
     }
 
@@ -56,7 +58,19 @@ class Database(context: Context) {
         for (index in 0 until expoArray.length()) {
             expoList.add(getExpo(expoArray.getJSONObject(index)))
         }
+        Log.d("DBG", "all expos: $expoList")
+
         return expoList
+    }
+
+    fun getAllModels(data: JSONObject): MutableList<Model> {
+        val modelArray = data.getJSONArray("all_models")
+        val modelList = mutableListOf<Model>()
+        for (index in 0 until modelArray.length()) {
+            modelList.add(getModel(modelArray.getJSONObject(index)))
+        }
+        Log.d("DBG", "all models: $modelList")
+        return modelList
     }
 
     fun getExpo(expoObject: JSONObject): Expo {

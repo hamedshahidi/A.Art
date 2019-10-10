@@ -1,5 +1,6 @@
 package com.dne.aart.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -9,23 +10,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
+import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.navOptions
 import com.dne.aart.R
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_art_list.view.*
 import kotlinx.android.synthetic.main.fragment_sign_up.*
-import kotlinx.android.synthetic.main.fragment_sign_up.view.*
 
 var sharedPrefFile: String = "kotlinsharedpreference"
+//val admin = false
+
 
 class SignUpFragment : Fragment() {
 
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var bundle: Bundle
     private var deviceID: String? = null
+    private var username: String = ""
+    private var isAdmin: Boolean= false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,8 +40,11 @@ class SignUpFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_sign_up, container, false)
     }
 
+    @SuppressLint("HardwareIds")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        isAdmin = checkIfAdmin()
 
         // check if fragment is added initialize sharedpreferences
         if (isAdded) {
@@ -54,12 +58,12 @@ class SignUpFragment : Fragment() {
                 context!!.contentResolver,
                 Settings.Secure.ANDROID_ID
             )
-            Log.d("UUID", deviceID)
+            Log.d("UUID", "uuid: $deviceID")
         }
 
         // At sign-up put the username and UUID to the shared preferences
         signupButton.setOnClickListener {
-            val username = usernameTextView.text.toString()
+            username = usernameTextView.text.toString()
             val editor: SharedPreferences.Editor = sharedPreferences.edit()
             editor.putString("username", username)
             editor.putString("uuid", deviceID)
@@ -69,13 +73,34 @@ class SignUpFragment : Fragment() {
             Log.d("USERNAME", sharedPreferences.getString("username", "No Value"))
             Log.d("UUID", sharedPreferences.getString("uuid", "No Value"))
             Log.d("UUID", sharedPreferences.all.toString())
-            //Toast.makeText(this, sharedNameValue, Toast.LENGTH_SHORT).show()
 
-            navigateToExpoList()
+            isAdmin = checkIfAdmin()
+            Log.d("DBGADMIN", isAdmin.toString())
+
+            // if user is admin start cloud anchor hosting navigation route
+            bundle = bundleOf("isAdmin" to isAdmin)
+
+            if (isAdmin) navigateToArtList()
+            else navigateToExpoList()
         }
     }
 
+    private fun navigateToArtList() {
+        findNavController().navigate(R.id.artListFragment, bundle, navOptions.options)
+    }
+
     private fun navigateToExpoList() {
-        findNavController().navigate(R.id.expoListFragment, null, navOptions.options)
+        findNavController().navigate(R.id.expoListFragment, bundle, navOptions.options)
+    }
+
+    private fun checkIfAdmin(): Boolean {
+        if (username == "admin") {
+            // check admin uuids
+            when (deviceID) {
+                "dd025b48b806cb6e" -> return true
+                "65225ac2ab20ca8c" -> return true
+            }
+        }
+        return false
     }
 }

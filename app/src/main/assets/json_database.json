@@ -45,7 +45,7 @@
         {
           "id": 2,
           "title": "model two title",
-          "info": "model one info",
+          "info": "model two info",
           "image_url": "img4",
           "model_file": "address of the model file",
           "audio": "address for audio",
@@ -53,6 +53,38 @@
           "cloud_anchor_id": "cloudAnchorId"
         }
       ]
+    }
+  ],
+  "all_models": [
+    {
+      "id": 1,
+      "title": "Green man",
+      "info": "model one info",
+      "image_url": "img3",
+      "model_file": "address of the model file",
+      "audio": "address for audio",
+      "score": 0,
+      "cloud_anchor_id": "cloudAnchorId"
+    },
+    {
+      "id": 2,
+      "title": "Model Girl",
+      "info": "model two info",
+      "image_url": "img4",
+      "model_file": "address of the model file",
+      "audio": "address for audio",
+      "score": 0,
+      "cloud_anchor_id": "cloudAnchorId"
+    },
+    {
+      "id": 3,
+      "title": "Green man",
+      "info": "model three info",
+      "image_url": "img6",
+      "model_file": "address of the model file",
+      "audio": "address for audio",
+      "score": 0,
+      "cloud_anchor_id": "cloudAnchorId"
     }
   ]
 }

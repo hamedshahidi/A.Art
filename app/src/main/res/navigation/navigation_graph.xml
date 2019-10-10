@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_signUpFragment_to_expoListFragment"
             app:destination="@id/expoListFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_artListFragment"
+            app:destination="@id/artListFragment" />
     </fragment>
     <fragment
         android:id="@+id/expoListFragment"
@@ -54,12 +57,15 @@
             android:name="expo_id"
             android:defaultValue="0"
             app:argType="integer" />
+        <argument
+            android:name="admin"
+            app:argType="boolean"
+            android:defaultValue="false" />
         <action
             android:id="@+id/action_artListFragment_to_camSceneFragment"
             app:destination="@id/camSceneFragment"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
-
     </fragment>
     <fragment
         android:id="@+id/camSceneFragment"
@@ -75,5 +81,9 @@
             app:destination="@id/artListFragment"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
+        <argument
+            android:name="admin"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
 </navigation>
