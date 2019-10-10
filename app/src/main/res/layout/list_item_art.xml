@@ -2,21 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/expo_cell_container"
     android:layout_width="match_parent"
     android:layout_height="150dp"
-    android:orientation="horizontal"
-    android:background="@drawable/list_view_style"
+    android:layout_margin="8dp"
+    android:background="@color/layoutBackground"
     android:elevation="8dp"
-    android:padding="8dp"
-    android:layout_marginBottom="8dp"
-    android:backgroundTint="@color/textWhite"
-    android:id="@+id/expo_cell_container">
+    android:orientation="horizontal">
 
 
     <ImageView
         android:id="@+id/imgv_model"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:adjustViewBounds="true"
         android:background="@drawable/image_frame_boarder"
         android:cropToPadding="true"
@@ -34,16 +32,17 @@
             android:id="@+id/tv_model_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:text="The wizard of OZ"
+            android:textColor="@color/colorAccent"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/colorAccent"
-            android:layout_marginBottom="8dp"
 
 
             />
+
         <ScrollView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -55,8 +54,8 @@
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:text="@string/large_text"
-                android:textSize="18sp"
                 android:textColor="@color/black"
+                android:textSize="18sp"
 
                 />
         </ScrollView>

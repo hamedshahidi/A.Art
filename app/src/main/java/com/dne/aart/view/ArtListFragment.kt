@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dne.aart.R
 import com.dne.aart.util.AdoptiveListAdapter
@@ -51,5 +52,12 @@ class ArtListFragment : Fragment() {
         linearLayoutManager = LinearLayoutManager(activity!!.applicationContext)
         rcv_models.layoutManager = linearLayoutManager
         rcv_models.adapter = AdoptiveListAdapter(context!!,expoId, isAdmin)
+
+        // show divider between list items
+        val dividerItemDecoration = DividerItemDecoration(
+            rcv_models.context,
+            linearLayoutManager.orientation
+        )
+        rcv_models.addItemDecoration(dividerItemDecoration)
     }
 }

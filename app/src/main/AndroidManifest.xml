@@ -37,6 +37,7 @@
         <activity
             android:name=".view.MapsActivity"
             android:label="@string/title_activity_maps"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait" />
         <activity
             android:name=".view.MainActivity"
@@ -53,7 +54,7 @@
         <meta-data android:name="com.google.ar.core" android:value="required" />
         <meta-data
             android:name="com.google.android.ar.API_KEY"
-            android:value="AIzaSyDH2S9_2MLhcKs2oN0c5EzZz-ivEdtD6aI"/>
+            android:value="AIzaSyBN66eGSGSGhBQks2ilJeLl_4t0q-6LfEA"/>
     </application>
 
 </manifest>

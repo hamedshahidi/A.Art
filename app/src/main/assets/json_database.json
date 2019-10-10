@@ -18,7 +18,7 @@
           "model_file": "address of the model file",
           "audio": "address for audio",
           "score": 0,
-          "cloud_anchor_id": "cloudAnchorId"
+          "cloud_anchor_id": "ua-cc83da10b5004dab81d437934cac3958"
         }
       ]
     },
@@ -28,8 +28,8 @@
       "info": "Art student exhibition",
       "image_url": "aalto_white",
       "location": {
-        "lat": 60.1861,
-        "long": 24.8224
+        "lat": 60.179781,
+        "long": 24.827255
       },
       "models": [
         {
@@ -86,13 +86,13 @@
         },
         {
           "id": 3,
-          "title": "model 3 title",
-          "info": "model 3 info",
-          "image_url": "img8",
+          "title": "Deer",
+          "info": "model three info",
+          "image_url": "img6",
           "model_file": "address of the model file",
           "audio": "address for audio",
           "score": 0,
-          "cloud_anchor_id": "cloudAnchorId"
+          "cloud_anchor_id": "ua-cc83da10b5004dab81d437934cac3958"
         }
       ]
     }
@@ -106,7 +106,7 @@
       "model_file": "address of the model file",
       "audio": "address for audio",
       "score": 0,
-      "cloud_anchor_id": "cloudAnchorId"
+      "cloud_anchor_id": "ua-cc83da10b5004dab81d437934cac3958"
     },
     {
       "id": 2,
@@ -120,13 +120,13 @@
     },
     {
       "id": 3,
-      "title": "Green man",
+      "title": "Deer",
       "info": "model three info",
       "image_url": "img6",
       "model_file": "address of the model file",
       "audio": "address for audio",
       "score": 0,
-      "cloud_anchor_id": "cloudAnchorId"
+      "cloud_anchor_id": "ua-cc83da10b5004dab81d437934cac3958"
     }
   ]
 }

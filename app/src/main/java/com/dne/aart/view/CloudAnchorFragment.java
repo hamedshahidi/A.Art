@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -188,6 +189,7 @@ public class CloudAnchorFragment extends ArFragment {
             storageManager.saveWithAnchorID(mHostActivity, anchor.getCloudAnchorId());
 
             tvInfo.setText("Cloud Anchor Hosted. ID: " + anchor.getCloudAnchorId());
+            Log.d("ANCHOR", anchor.getCloudAnchorId());
 
 
             /*Toast.makeText(getContext(),

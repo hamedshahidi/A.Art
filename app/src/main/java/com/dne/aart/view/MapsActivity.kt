@@ -92,11 +92,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
                 val builder = NotificationCompat.Builder(this@MapsActivity, CHANNEL_ID)
                     .setSmallIcon(R.drawable.bell)
-                    .setContentTitle("My notification")
-                    .setContentText("Much longer text that cannot fit one line...")
+                    .setContentTitle("A.Art")
+                    .setContentText("Something is close!!")
                     .setStyle(
                         NotificationCompat.BigTextStyle()
-                            .bigText("Much longer text that cannot fit one line...")
+                            .bigText("Something is close, Check it out!")
                     )
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                     .build()
@@ -109,7 +109,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                     userHasBeenNotifiedOfEvent = true
                 }
                 //TODO() show distance?!
-                Toast.makeText(this@MapsActivity, "$distanceInKm Km", Toast.LENGTH_SHORT).show()
+
+                //Toast.makeText(this@MapsActivity, "$distanceInKm Km", Toast.LENGTH_SHORT).show()
             }
         }
         createLocationRequest()
