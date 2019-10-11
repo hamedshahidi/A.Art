@@ -108,9 +108,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
                     userHasBeenNotifiedOfEvent = true
                 }
-                //TODO() show distance?!
-
-                //Toast.makeText(this@MapsActivity, "$distanceInKm Km", Toast.LENGTH_SHORT).show()
             }
         }
         createLocationRequest()
@@ -310,7 +307,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         }
     }
 
-    // 1 //TODO() maybe later?!
+    // 1
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CHECK_SETTINGS) {

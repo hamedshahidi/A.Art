@@ -154,10 +154,6 @@ public class CloudAnchorFragment extends ArFragment {
                 anchor -> onResolvedAnchorAvailable(anchor, shortCode));
     }
 
-    private synchronized void onShowArtButtonPressed() {
-        // TODO() int shortcode = ... modelid expoid
-    }
-
     // Modify the renderables when a new anchor is available.
     @SuppressLint("SetTextI18n")
     private synchronized void setNewAnchor(@Nullable Anchor anchor) {
