@@ -28,18 +28,11 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_like"
+            android:id="@+id/btn_Show_art"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:text="Like" />
-
-        <Button
-            android:id="@+id/btn_dislike"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="Dislike" />
+            android:text="press to see the beauty" />
 
 
     </LinearLayout>
