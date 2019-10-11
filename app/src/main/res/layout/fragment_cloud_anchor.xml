@@ -14,40 +14,77 @@
         android:id="@+id/tv_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="50dp"
         android:layout_gravity="bottom"
+        android:layout_margin="2dp"
+        android:background="@drawable/tv_background"
         android:backgroundTint="@color/white"
         android:gravity="center_vertical"
+        android:minHeight="50dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:background="@drawable/tv_background"
-        android:text="info"
-        android:layout_margin="2dp"/>
+        android:text="info" />
 
     <LinearLayout
+        android:id="@+id/admin_panel"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/clear_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CLEAR"
-            android:layout_margin="5dp"/>
-
-        <Button
-            android:id="@+id/resolve_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="RESOLVE"
-            android:layout_margin="5dp"/>
-
-        <EditText
-            android:id="@+id/et_resolve_id"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40sp"
-            android:layout_margin="5dp"
-            android:background="@drawable/tv_background"/>
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/clear_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="CLEAR" />
+
+            <Button
+                android:id="@+id/resolve_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="RESOLVE" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:text="Expo ID:" />
+
+            <EditText
+                android:id="@+id/et_expo_id"
+                android:layout_width="match_parent"
+                android:layout_height="40sp"
+                android:layout_margin="5dp"
+                android:background="@drawable/tv_background"
+                android:padding="5sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                android:text="Short code:" />
+
+            <EditText
+                android:id="@+id/et_resolve_id"
+                android:layout_width="match_parent"
+                android:layout_height="40sp"
+                android:layout_margin="5dp"
+                android:background="@drawable/tv_background"
+                android:padding="5sp"
+                android:textSize="12sp" />
+
+        </LinearLayout>
     </LinearLayout>
 </FrameLayout>

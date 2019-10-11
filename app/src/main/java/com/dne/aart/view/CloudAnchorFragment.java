@@ -1,14 +1,11 @@
 package com.dne.aart.view;
 
-// TODO/() add activity instead of fragment for camera scene.!! take screen shots!!
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +14,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.Nullable;
+
 import com.dne.aart.R;
 import com.dne.aart.util.CloudAnchorManager;
 import com.dne.aart.util.StorageManager;
@@ -33,8 +32,11 @@ import com.google.ar.core.Config.CloudAnchorMode;
 import com.google.ar.core.Session;
 import com.google.ar.core.Anchor.CloudAnchorState;
 
+import java.util.Objects;
+
 public class CloudAnchorFragment extends ArFragment {
 
+    private int expoId;
     private int modelId;
     private TextView tvInfo;
     private Boolean isAdmin;
@@ -42,9 +44,10 @@ public class CloudAnchorFragment extends ArFragment {
     private Scene arScene;
     private Button resolveButton;
     private Button clearButton;
+    private Button showArtButton;
     private AnchorNode anchorNode;
     private Activity mHostActivity;
-    private ModelRenderable andyRenderable;
+    private ModelRenderable modelRenderable;
     private final CloudAnchorManager cloudAnchorManager = new CloudAnchorManager();
     private final StorageManager storageManager = new StorageManager();
 
@@ -56,6 +59,7 @@ public class CloudAnchorFragment extends ArFragment {
         mHostActivity = (Activity) context;
 
         if (getArguments() != null) {
+            expoId = getArguments().getInt("expoId");
             modelId = getArguments().getInt("modelId");
             isAdmin = getArguments().getBoolean("isAdmin");
         }
@@ -64,7 +68,7 @@ public class CloudAnchorFragment extends ArFragment {
         ModelRenderable.builder()
                 .setSource(context, modelUri)
                 .build()
-                .thenAccept(renderable -> andyRenderable = renderable);
+                .thenAccept(renderable -> modelRenderable = renderable);
     }
 
     @Override
@@ -84,15 +88,21 @@ public class CloudAnchorFragment extends ArFragment {
         resolveButton = rootView.findViewById(R.id.resolve_button);
         resolveButton.setOnClickListener(v -> onResolveButtonPressed());
 
+        showArtButton = getParentFragment().getView().findViewById(R.id.btn_Show_art);
+
         editText = rootView.findViewById(R.id.et_resolve_id);
+
+        LinearLayout adminPanel = rootView.findViewById(R.id.admin_panel);
 
         tvInfo = rootView.findViewById(R.id.tv_info);
 
-        if (!isAdmin){
-            clearButton.setVisibility(View.GONE);
+        if (!isAdmin) {
+            adminPanel.setVisibility(View.GONE);
+            /*clearButton.setVisibility(View.GONE);
             resolveButton.setVisibility(View.GONE);
-            editText.setVisibility(View.GONE);
+            editText.setVisibility(View.GONE);*/
             tvInfo.setVisibility(View.GONE);
+            showArtButton.setOnClickListener(v -> onResolveButtonPressed());
         }
 
         arScene = getArSceneView().getScene();
@@ -112,7 +122,6 @@ public class CloudAnchorFragment extends ArFragment {
 
         resolveButton.setEnabled(false);
 
-        //Toast.makeText(getContext(), "Now hosting...", Toast.LENGTH_LONG).show();
         tvInfo.setText("Now hosting...");
 
         cloudAnchorManager.hostCloudAnchor(
@@ -129,17 +138,24 @@ public class CloudAnchorFragment extends ArFragment {
 
     private synchronized void onResolveButtonPressed() {
 
-        String shortCode = editText.getText().toString();
+        //String shortCode = editText.getText().toString();
         //int shortCode = Integer.valueOf(editText.getText().toString());
-        //onShortCodeEntered(shortCode);
-        /*String cloudAnchorId =
-                storageManager.resolveWithCloudAnchorId(mHostActivity, shortCode);*/
+        int mModelId = modelId;
+        int mExpoId = getExpoId();
+
+        Float shortCode = storageManager.generateShortCode(mExpoId, mModelId);
+        onShortCodeEntered(shortCode);
+        String cloudAnchorId =
+                storageManager.getCloudAnchorId(mHostActivity, shortCode);
 
         cloudAnchorManager.resolveCloudAnchor(
                 getArSceneView().getSession(),
-                shortCode,
-                anchor -> onResolvedAnchorAvailable2(anchor, shortCode));
+                cloudAnchorId,
+                anchor -> onResolvedAnchorAvailable(anchor, shortCode));
+    }
 
+    private synchronized void onShowArtButtonPressed() {
+        // TODO() int shortcode = ... modelid expoid
     }
 
     // Modify the renderables when a new anchor is available.
@@ -151,7 +167,7 @@ public class CloudAnchorFragment extends ArFragment {
             anchorNode = null;
         }
         if (anchor != null) {
-            if (andyRenderable == null) {
+            if (modelRenderable == null) {
                 // Display an error message if the renderable model was not available.
                 //Toast toast = Toast.makeText(getContext(), "Andy model was not loaded.", Toast.LENGTH_LONG);
                 //toast.setGravity(Gravity.CENTER, 0, 0);
@@ -166,7 +182,7 @@ public class CloudAnchorFragment extends ArFragment {
             // Create the transformable andy and add it to the anchor.
             TransformableNode andy = new TransformableNode(getTransformationSystem());
             andy.setParent(anchorNode);
-            andy.setRenderable(andyRenderable);
+            andy.setRenderable(modelRenderable);
             andy.select();
         }
     }
@@ -182,95 +198,58 @@ public class CloudAnchorFragment extends ArFragment {
     private synchronized void onHostedAnchorAvailable(Anchor anchor) {
         CloudAnchorState cloudState = anchor.getCloudAnchorState();
         if (cloudState == CloudAnchorState.SUCCESS) {
-            // TODO ?!?! activity == null?
-            int shortCode = storageManager.nextShortCode(mHostActivity);
+            //int shortCode = storageManager.nextShortCode(mHostActivity);
+            EditText et = getView().findViewById(R.id.et_expo_id);
+            int mExpoId = getExpoId();
+            int mModelId = modelId;
+            Float shortCode = storageManager.generateShortCode(mExpoId, mModelId);
 
-            //storageManager.storeUsingShortCode(mHostActivity, shortCode, anchor.getCloudAnchorId());
-            storageManager.saveWithAnchorID(mHostActivity, anchor.getCloudAnchorId());
+            storageManager.storeUsingShortCode(mHostActivity, shortCode, anchor.getCloudAnchorId());
+            //storageManager.saveWithAnchorID(mHostActivity, anchor.getCloudAnchorId());
 
-            tvInfo.setText("Cloud Anchor Hosted. ID: " + anchor.getCloudAnchorId());
+            tvInfo.setText("Cloud Anchor Hosted. Anchor ID: " + anchor.getCloudAnchorId());
+            //tvInfo.setText("Cloud Anchor Hosted. Short code: " + shortCode);
+            //editText.setText(shortCode, EditText.BufferType.EDITABLE);
             Log.d("ANCHOR", anchor.getCloudAnchorId());
 
-
-            /*Toast.makeText(getContext(),
-                    "Cloud Anchor Hosted. ID: " + anchor.getCloudAnchorId(),
-                    Toast.LENGTH_LONG).show();*/
-            /*Toast.makeText(getContext(),
+            Toast.makeText(getContext(),
                     "Cloud Anchor Hosted. Short code: " + shortCode,
-                    Toast.LENGTH_LONG).show();*/
+                    Toast.LENGTH_LONG).show();
 
             setNewAnchor(anchor);
 
-        } else {
-
-            tvInfo.setText("Error while hosting: " + cloudState.toString());
-            /*Toast.makeText(getContext(),
-                    "Error while hosting: " + cloudState.toString(),
-                    Toast.LENGTH_SHORT).show();*/
-        }
+        } else tvInfo.setText("Error while hosting: " + cloudState.toString());
     }
 
     @SuppressLint("SetTextI18n")
-    private synchronized void onShortCodeEntered(int shortCode) {
+    private synchronized void onShortCodeEntered(Float shortCode) {
         String cloudAnchorId = storageManager.getCloudAnchorId(getActivity(), shortCode);
         if (cloudAnchorId == null || cloudAnchorId.isEmpty()) {
             tvInfo.setText("A Cloud Anchor ID for the short code " + shortCode + " was not found.");
-/*            Toast.makeText(mHostActivity,
-                    "A Cloud Anchor ID for the short code " + shortCode + " was not found.",
-                    Toast.LENGTH_SHORT).show();*/
+
             return;
         }
         resolveButton.setEnabled(false);
         cloudAnchorManager.resolveCloudAnchor(
-                getArSceneView().getSession(),
+                Objects.requireNonNull(getArSceneView().getSession()),
                 cloudAnchorId,
                 anchor -> onResolvedAnchorAvailable(anchor, shortCode));
     }
 
     @SuppressLint("SetTextI18n")
-    private synchronized void onResolvedAnchorAvailable(Anchor anchor, int shortCode) {
+    private synchronized void onResolvedAnchorAvailable(Anchor anchor, Float shortCode) {
         CloudAnchorState cloudState = anchor.getCloudAnchorState();
         if (cloudState == CloudAnchorState.SUCCESS) {
+
             tvInfo.setText("Cloud Anchor Resolved. Short code: " + shortCode);
-/*            Toast.makeText(mHostActivity, "\"Cloud Anchor Resolved. Short code: " + shortCode,
-                    Toast.LENGTH_SHORT).show();*/
+            Log.d("SHORTCODE", "Cloud Anchor Resolved. Short code: " + shortCode);
+
             setNewAnchor(anchor);
         } else {
             tvInfo.setText("Error while resolving anchor with short code "
                     + shortCode
                     + ". Error: "
                     + cloudState.toString());
-            /*Toast.makeText(mHostActivity,
-                    "Error while resolving anchor with short code "
-                            + shortCode
-                            + ". Error: "
-                            + cloudState.toString(),
-                    Toast.LENGTH_SHORT).show();*/
-
-            resolveButton.setEnabled(true);
-        }
-    }
-
-    //dev
-    @SuppressLint("SetTextI18n")
-    private synchronized void onResolvedAnchorAvailable2(Anchor anchor, String shortCode) {
-        CloudAnchorState cloudState = anchor.getCloudAnchorState();
-        if (cloudState == CloudAnchorState.SUCCESS) {
-            tvInfo.setText("Cloud Anchor Resolved. Short code: " + shortCode);
-            /*Toast.makeText(mHostActivity, "\"Cloud Anchor Resolved. Short code: \" + shortCode",
-                    Toast.LENGTH_SHORT).show();*/
-            setNewAnchor(anchor);
-        } else {
-            tvInfo.setText("Error while resolving anchor with short code "
-                    + shortCode
-                    + ". Error: "
-                    + cloudState.toString());
-            /*Toast.makeText(mHostActivity,
-                    "Error while resolving anchor with short code "
-                            + shortCode
-                            + ". Error: "
-                            + cloudState.toString(),
-                    Toast.LENGTH_SHORT).show();*/
 
             resolveButton.setEnabled(true);
         }
@@ -278,16 +257,40 @@ public class CloudAnchorFragment extends ArFragment {
 
     private Uri getModel(int modelId) {
         String modelName;
-        switch (modelId){
-            case 1: modelName ="green_man.sfb";break;
-            case 2: modelName ="scene.sfb";break;
-            case 3: modelName = "deer_test.sfb";break;
-            case 4: modelName = "angel.sfb";break;
-            case 5: modelName = "lowpolytree.sfb";break;
-            case 6: modelName = "skull_two.sfb";break;
-            default: modelName ="green_man.sfb";
+        switch (modelId) {
+            case 1:
+                modelName = "green_man.sfb";
+                break;
+            case 2:
+                modelName = "scene.sfb";
+                break;
+            case 3:
+                modelName = "deer_test.sfb";
+                break;
+            case 4:
+                modelName = "angel.sfb";
+                break;
+            case 5:
+                modelName = "lowpolytree.sfb";
+                break;
+            case 6:
+                modelName = "skull_two.sfb";
+                break;
+            default:
+                modelName = "green_man.sfb";
         }
         Uri uriModel = Uri.parse(modelName);
-        return  uriModel;
+        return uriModel;
+    }
+
+    private int getExpoId(){
+        int id;
+        if (isAdmin) {
+            if (!editText.getText().toString().isEmpty()) {
+                id = Integer.valueOf(editText.getText().toString());
+            } else id = 0;
+        }
+        else id = expoId;
+        return id;
     }
 }

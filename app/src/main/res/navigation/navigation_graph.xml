@@ -96,5 +96,9 @@
             android:name="admin"
             app:argType="boolean"
             android:defaultValue="false" />
+        <argument
+            android:name="expoId"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 </navigation>

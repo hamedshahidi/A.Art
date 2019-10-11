@@ -92,6 +92,7 @@ class AdoptiveListAdapter(
                     ArtListFragmentDirections.actionArtListFragmentToCamSceneFragment()
                 action.modelId = model.id
                 action.admin = isAdmin
+                action.expoId = expoId
                 view.findNavController().navigate(action)
             }
         }

@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.fragment_cam_scene.*
 
 class CamSceneFragment : Fragment() {
 
+    private var expoId = 0
     private var modelId = 0
     private var isAdmin: Boolean = false
 
@@ -25,6 +26,7 @@ class CamSceneFragment : Fragment() {
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         val safeArgs: CamSceneFragmentArgs by navArgs()
+        expoId = safeArgs.expoId
         modelId = safeArgs.modelId
         isAdmin = safeArgs.admin
     }
@@ -50,6 +52,7 @@ class CamSceneFragment : Fragment() {
                 fragment = CloudAnchorFragment()
 
                 val bundle = Bundle()
+                bundle.putInt("expoId", expoId)
                 bundle.putInt("modelId", modelId)
                 bundle.putBoolean("isAdmin", isAdmin)
                 fragment.setArguments(bundle)
