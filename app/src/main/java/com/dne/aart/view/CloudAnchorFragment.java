@@ -90,7 +90,7 @@ public class CloudAnchorFragment extends ArFragment {
 
         showArtButton = getParentFragment().getView().findViewById(R.id.btn_Show_art);
 
-        editText = rootView.findViewById(R.id.et_resolve_id);
+        editText = rootView.findViewById(R.id.et_expo_id);
 
         LinearLayout adminPanel = rootView.findViewById(R.id.admin_panel);
 
@@ -279,14 +279,13 @@ public class CloudAnchorFragment extends ArFragment {
         return uriModel;
     }
 
-    private int getExpoId(){
+    private int getExpoId() {
         int id;
         if (isAdmin) {
-            if (!editText.getText().toString().isEmpty()) {
-                id = Integer.valueOf(editText.getText().toString());
-            } else id = 0;
-        }
-        else id = expoId;
+            id = Integer.valueOf(editText.getText().toString());
+            Log.d("DBG", "admin/ not empty: id: " + String.valueOf(id));
+        } else id = expoId;
+        Log.d("DBG", "NOT admin/ id: " + String.valueOf(id));
         return id;
     }
 }
