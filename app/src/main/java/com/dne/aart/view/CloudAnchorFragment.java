@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -40,7 +41,8 @@ public class CloudAnchorFragment extends ArFragment {
     private int modelId;
     private TextView tvInfo;
     private Boolean isAdmin;
-    private EditText editText;
+    private EditText etExpoId;
+    private EditText etShortCode;
     private Scene arScene;
     private Button resolveButton;
     private Button clearButton;
@@ -64,11 +66,13 @@ public class CloudAnchorFragment extends ArFragment {
             isAdmin = getArguments().getBoolean("isAdmin");
         }
 
-        Uri modelUri = getModel(modelId);
+        getModel(modelId);
+
+        /*Uri modelUri = getModel(modelId);
         ModelRenderable.builder()
                 .setSource(context, modelUri)
                 .build()
-                .thenAccept(renderable -> modelRenderable = renderable);
+                .thenAccept(renderable -> modelRenderable = renderable);*/
     }
 
     @Override
@@ -88,9 +92,11 @@ public class CloudAnchorFragment extends ArFragment {
         resolveButton = rootView.findViewById(R.id.resolve_button);
         resolveButton.setOnClickListener(v -> onResolveButtonPressed());
 
-        showArtButton = getParentFragment().getView().findViewById(R.id.btn_Show_art);
+        assert getParentFragment() != null;
+        showArtButton = Objects.requireNonNull(getParentFragment().getView()).findViewById(R.id.btn_Show_art);
 
-        editText = rootView.findViewById(R.id.et_expo_id);
+        etExpoId = rootView.findViewById(R.id.et_expo_id);
+        etShortCode = rootView.findViewById(R.id.et_resolve_id);
 
         LinearLayout adminPanel = rootView.findViewById(R.id.admin_panel);
 
@@ -98,9 +104,6 @@ public class CloudAnchorFragment extends ArFragment {
 
         if (!isAdmin) {
             adminPanel.setVisibility(View.GONE);
-            /*clearButton.setVisibility(View.GONE);
-            resolveButton.setVisibility(View.GONE);
-            editText.setVisibility(View.GONE);*/
             tvInfo.setVisibility(View.GONE);
             showArtButton.setOnClickListener(v -> onResolveButtonPressed());
         }
@@ -113,19 +116,26 @@ public class CloudAnchorFragment extends ArFragment {
 
     @SuppressLint("SetTextI18n")
     private synchronized void onArPlaneTap(HitResult hitResult) {
-        if (anchorNode != null) {
-            // Do nothing if there was already an anchor in the Scene.
-            return;
+
+        // check if expo ID is provided start hosting the model anchor to cloud on plane tap.
+        if (!etExpoId.getText().toString().isEmpty()){
+            hideKeyboard(mHostActivity);
+            if (anchorNode != null) {
+                // Do nothing if there was already an anchor in the Scene.
+                return;
+            }
+            Anchor anchor = hitResult.createAnchor();
+            setNewAnchor(anchor);
+
+            resolveButton.setEnabled(false);
+
+            tvInfo.setText("Now hosting...");
+
+            cloudAnchorManager.hostCloudAnchor(
+                    Objects.requireNonNull(getArSceneView().getSession()), anchor, this::onHostedAnchorAvailable);
+        } else {
+            tvInfo.setText("Please enter Expo ID first");
         }
-        Anchor anchor = hitResult.createAnchor();
-        setNewAnchor(anchor);
-
-        resolveButton.setEnabled(false);
-
-        tvInfo.setText("Now hosting...");
-
-        cloudAnchorManager.hostCloudAnchor(
-                getArSceneView().getSession(), anchor, this::onHostedAnchorAvailable);
     }
 
     private synchronized void onClearButtonPressed() {
@@ -137,19 +147,28 @@ public class CloudAnchorFragment extends ArFragment {
     }
 
     private synchronized void onResolveButtonPressed() {
+        Float shortCode;
+        String str = etShortCode.getText().toString();
 
-        //String shortCode = editText.getText().toString();
-        //int shortCode = Integer.valueOf(editText.getText().toString());
-        int mModelId = modelId;
-        int mExpoId = getExpoId();
+        // Use provided shortcode for loading model.
+        // If no shortcode provided generate it from hosted model data.
+        if (!str.isEmpty()){
+            shortCode = Float.valueOf(str);
+            int mModelId = Integer.valueOf(str.substring(str.indexOf(".")+1));
+            getModel(mModelId);
+        } else {
+            int mModelId = modelId;
+            int mExpoId = getExpoId();
+            shortCode = storageManager.generateShortCode(mExpoId, mModelId);
+        }
 
-        Float shortCode = storageManager.generateShortCode(mExpoId, mModelId);
         onShortCodeEntered(shortCode);
+
         String cloudAnchorId =
                 storageManager.getCloudAnchorId(mHostActivity, shortCode);
 
         cloudAnchorManager.resolveCloudAnchor(
-                getArSceneView().getSession(),
+                Objects.requireNonNull(getArSceneView().getSession()),
                 cloudAnchorId,
                 anchor -> onResolvedAnchorAvailable(anchor, shortCode));
     }
@@ -164,10 +183,6 @@ public class CloudAnchorFragment extends ArFragment {
         }
         if (anchor != null) {
             if (modelRenderable == null) {
-                // Display an error message if the renderable model was not available.
-                //Toast toast = Toast.makeText(getContext(), "Andy model was not loaded.", Toast.LENGTH_LONG);
-                //toast.setGravity(Gravity.CENTER, 0, 0);
-                //toast.show();
                 tvInfo.setText("Model was not loaded.");
                 return;
             }
@@ -194,18 +209,15 @@ public class CloudAnchorFragment extends ArFragment {
     private synchronized void onHostedAnchorAvailable(Anchor anchor) {
         CloudAnchorState cloudState = anchor.getCloudAnchorState();
         if (cloudState == CloudAnchorState.SUCCESS) {
-            //int shortCode = storageManager.nextShortCode(mHostActivity);
-            EditText et = getView().findViewById(R.id.et_expo_id);
+            EditText et = Objects.requireNonNull(getView()).findViewById(R.id.et_expo_id);
             int mExpoId = getExpoId();
             int mModelId = modelId;
             Float shortCode = storageManager.generateShortCode(mExpoId, mModelId);
 
             storageManager.storeUsingShortCode(mHostActivity, shortCode, anchor.getCloudAnchorId());
-            //storageManager.saveWithAnchorID(mHostActivity, anchor.getCloudAnchorId());
 
-            tvInfo.setText("Cloud Anchor Hosted. Anchor ID: " + anchor.getCloudAnchorId());
-            //tvInfo.setText("Cloud Anchor Hosted. Short code: " + shortCode);
-            //editText.setText(shortCode, EditText.BufferType.EDITABLE);
+            tvInfo.setText("Cloud Anchor Hosted. Short code: " + shortCode
+            + "\n Anchor ID: " + anchor.getCloudAnchorId());
             Log.d("ANCHOR", anchor.getCloudAnchorId());
 
             Toast.makeText(getContext(),
@@ -219,7 +231,7 @@ public class CloudAnchorFragment extends ArFragment {
 
     @SuppressLint("SetTextI18n")
     private synchronized void onShortCodeEntered(Float shortCode) {
-        String cloudAnchorId = storageManager.getCloudAnchorId(getActivity(), shortCode);
+        String cloudAnchorId = storageManager.getCloudAnchorId(Objects.requireNonNull(getActivity()), shortCode);
         if (cloudAnchorId == null || cloudAnchorId.isEmpty()) {
             tvInfo.setText("A Cloud Anchor ID for the short code " + shortCode + " was not found.");
 
@@ -251,7 +263,7 @@ public class CloudAnchorFragment extends ArFragment {
         }
     }
 
-    private Uri getModel(int modelId) {
+    private void getModel(int modelId) {
         String modelName;
         switch (modelId) {
             case 1:
@@ -275,17 +287,27 @@ public class CloudAnchorFragment extends ArFragment {
             default:
                 modelName = "green_man.sfb";
         }
-        Uri uriModel = Uri.parse(modelName);
-        return uriModel;
+        Uri modelUri = Uri.parse(modelName);
+        ModelRenderable.builder()
+                .setSource(mHostActivity, modelUri)
+                .build()
+                .thenAccept(renderable -> modelRenderable = renderable);
     }
 
     private int getExpoId() {
         int id;
         if (isAdmin) {
-            id = Integer.valueOf(editText.getText().toString());
-            Log.d("DBG", "admin/ not empty: id: " + String.valueOf(id));
+            id = Integer.valueOf(etExpoId.getText().toString());
+            Log.d("DBG", "admin/ not empty: id: " + id);
         } else id = expoId;
-        Log.d("DBG", "NOT admin/ id: " + String.valueOf(id));
+        Log.d("DBG", "NOT admin/ id: " + id);
         return id;
+    }
+
+    // Hide the soft keyboard
+    private void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        assert imm != null;
+        imm.hideSoftInputFromWindow(Objects.requireNonNull(activity.getCurrentFocus()).getWindowToken(), 0);
     }
 }
