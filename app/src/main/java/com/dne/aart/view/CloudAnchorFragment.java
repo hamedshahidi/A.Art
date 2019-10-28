@@ -98,6 +98,7 @@ public class CloudAnchorFragment extends ArFragment {
 
         tvInfo = rootView.findViewById(R.id.tv_info);
 
+        // modify UI for user/admin
         if (!isAdmin) {
             adminPanel.setVisibility(View.GONE);
             tvInfo.setVisibility(View.GONE);

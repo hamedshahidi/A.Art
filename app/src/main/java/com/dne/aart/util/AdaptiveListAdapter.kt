@@ -29,6 +29,8 @@ class AdoptiveListAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val layoutInflater = LayoutInflater.from(parent.context)
 
+        // If exhibition ID is provided select cell layout for showing arts
+        // otherwise select cell layout for showing exhibitions.
         val cellRow = if (expoId == null) {
             layoutInflater.inflate(R.layout.list_item_expo, parent, false)
                     as LinearLayout
@@ -69,10 +71,10 @@ class AdoptiveListAdapter(
             }
 
         } else {
-            // If exhibition id is available, show list of models
-            var allModels: MutableList<Model>
 
-            // If user is admin get all models from data, otherwise get only this expos models
+            val allModels: MutableList<Model>
+
+            // If user is admin get all models from data, otherwise get only models for this expo
             allModels = when {
                 isAdmin -> DataManager.allModels.toMutableList()
                 else -> {

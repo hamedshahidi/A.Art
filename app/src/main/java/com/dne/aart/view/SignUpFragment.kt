@@ -19,8 +19,6 @@ import com.dne.aart.R
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 
 var sharedPrefFile: String = "kotlinsharedpreference"
-//val admin = false
-
 
 class SignUpFragment : Fragment() {
 

@@ -75,7 +75,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                 lastLocation = p0.lastLocation
 
                 // Place a new marker on the map at our location, will not override older marker
-                //placeMarkerOnMap(LatLng(lastLocation.latitude, lastLocation.longitude))
+                // placeMarkerOnMap(LatLng(lastLocation.latitude, lastLocation.longitude))
 
                 // Log our location
                 Log.d(
