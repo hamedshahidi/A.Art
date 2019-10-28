@@ -12,7 +12,6 @@ import androidx.navigation.fragment.navArgs
 import com.dne.aart.R
 import kotlinx.android.synthetic.main.fragment_cam_scene.*
 
-
 class CamSceneFragment : Fragment() {
 
     private var expoId = 0
@@ -39,11 +38,12 @@ class CamSceneFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (isAdmin) bottomPanel.isVisible = false
+        else bottomPanel.isVisible = false
 
         val fManager = childFragmentManager
-        //fragment = fManager.findFragmentById(R.id.ar_container)
         try {
             var fragment = fManager.findFragmentById(com.dne.aart.R.id.ar_fragment_container)
+
             if (fragment == null) {
                 fragment = CloudAnchorFragment()
 
@@ -55,7 +55,7 @@ class CamSceneFragment : Fragment() {
                 fManager.beginTransaction().add(R.id.ar_fragment_container, fragment).commit()
             }
         } catch (e: Exception){
-            Log.d("DBG", e.message)
+            Log.d("DBG", e.toString())
         }
     }
 }

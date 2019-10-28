@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.dne.aart.R;
@@ -52,6 +53,7 @@ public class CloudAnchorFragment extends ArFragment {
     private ModelRenderable modelRenderable;
     private final CloudAnchorManager cloudAnchorManager = new CloudAnchorManager();
     private final StorageManager storageManager = new StorageManager();
+    private boolean showingModel = false;
 
 
     @Override
@@ -67,12 +69,6 @@ public class CloudAnchorFragment extends ArFragment {
         }
 
         getModel(modelId);
-
-        /*Uri modelUri = getModel(modelId);
-        ModelRenderable.builder()
-                .setSource(context, modelUri)
-                .build()
-                .thenAccept(renderable -> modelRenderable = renderable);*/
     }
 
     @Override
@@ -105,7 +101,6 @@ public class CloudAnchorFragment extends ArFragment {
         if (!isAdmin) {
             adminPanel.setVisibility(View.GONE);
             tvInfo.setVisibility(View.GONE);
-            showArtButton.setOnClickListener(v -> onResolveButtonPressed());
         }
 
         arScene = getArSceneView().getScene();
@@ -114,11 +109,33 @@ public class CloudAnchorFragment extends ArFragment {
         return rootView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // Resolve hosted model automatically on plane detection is soon as session is available.
+        if (!isAdmin) {
+            while (getArSceneView().getSession() == null) {
+                // system log message in case session does not load right away.
+                new java.util.Timer().schedule(
+                        new java.util.TimerTask() {
+                            @Override
+                            public void run() {
+                                System.out.println("Session is loading...");
+                            }
+                        },
+                        1000
+                );
+            }
+            onResolveButtonPressed();
+        }
+    }
+
     @SuppressLint("SetTextI18n")
     private synchronized void onArPlaneTap(HitResult hitResult) {
 
         // check if expo ID is provided start hosting the model anchor to cloud on plane tap.
-        if (!etExpoId.getText().toString().isEmpty()){
+        if (!etExpoId.getText().toString().isEmpty()) {
             hideKeyboard(mHostActivity);
             if (anchorNode != null) {
                 // Do nothing if there was already an anchor in the Scene.
@@ -144,6 +161,7 @@ public class CloudAnchorFragment extends ArFragment {
         resolveButton.setEnabled(true);
         tvInfo.setText("");
         setNewAnchor(null);
+        showingModel = false;
     }
 
     private synchronized void onResolveButtonPressed() {
@@ -151,10 +169,10 @@ public class CloudAnchorFragment extends ArFragment {
         String str = etShortCode.getText().toString();
 
         // Use provided shortcode for loading model.
-        // If no shortcode provided generate it from hosted model data.
-        if (!str.isEmpty()){
+        // If no shortcode provided generate it.
+        if (!str.isEmpty()) {
             shortCode = Float.valueOf(str);
-            int mModelId = Integer.valueOf(str.substring(str.indexOf(".")+1));
+            int mModelId = Integer.valueOf(str.substring(str.indexOf(".") + 1));
             getModel(mModelId);
         } else {
             int mModelId = modelId;
@@ -217,7 +235,7 @@ public class CloudAnchorFragment extends ArFragment {
             storageManager.storeUsingShortCode(mHostActivity, shortCode, anchor.getCloudAnchorId());
 
             tvInfo.setText("Cloud Anchor Hosted. Short code: " + shortCode
-            + "\n Anchor ID: " + anchor.getCloudAnchorId());
+                    + "\n Anchor ID: " + anchor.getCloudAnchorId());
 
             setNewAnchor(anchor);
 
@@ -244,9 +262,12 @@ public class CloudAnchorFragment extends ArFragment {
         CloudAnchorState cloudState = anchor.getCloudAnchorState();
         if (cloudState == CloudAnchorState.SUCCESS) {
 
+
             tvInfo.setText("Cloud Anchor Resolved. Short code: " + shortCode);
 
             setNewAnchor(anchor);
+
+            showingModel = true;
         } else {
             tvInfo.setText("Error while resolving anchor with short code "
                     + shortCode
