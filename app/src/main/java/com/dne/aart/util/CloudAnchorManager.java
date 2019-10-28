@@ -54,7 +54,7 @@ public class CloudAnchorManager {
         }
     }
 
-    /** Used to clear any currently registered listeners, so they wont be called again. */
+    // Used to clear any currently registered listeners, so they wont be called again.
     public synchronized void clearListeners() {
         pendingAnchors.clear();
     }

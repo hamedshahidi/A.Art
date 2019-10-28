@@ -15,7 +15,6 @@ import android.location.Location
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
@@ -58,7 +57,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     private var circleRadius: Double = 150.0
     private var userHasBeenNotifiedOfEvent = false
 
-    // ------------ ON CREATE ------------------
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
@@ -185,11 +183,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     }
 
     private fun placeMarkerOnMap(testLoc: LatLng) {
-        // 1
-        //expoLocation = LatLng(expoLat ?: 0.0, expoLon ?: 0.0)
-        //val markerOptions = MarkerOptions().position(expoLocation)
+
         val markerOptions = MarkerOptions().position(testLoc)
-        // 2
         map.addMarker(markerOptions)
 
         drawRadiusCircle()
@@ -221,9 +216,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
             if (null != addresses && addresses.isNotEmpty()) {
                 address = addresses[0]
                 for (i in 0 until address.maxAddressLineIndex) {
-                    addressText += if (i == 0) address.getAddressLine(i) else "\n" + address.getAddressLine(
-                        i
-                    )
+                    addressText += if (i == 0) address.getAddressLine(i)
+                    else "\n" + address.getAddressLine(i)
                 }
             }
         } catch (e: IOException) {
@@ -276,15 +270,15 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
             locationUpdateState = true
             startLocationUpdates()
         }
-        task.addOnFailureListener { e ->
+        task.addOnFailureListener { exception ->
             // 6
-            if (e is ResolvableApiException) {
+            if (exception is ResolvableApiException) {
                 // Location settings are not satisfied, but this can be fixed
                 // by showing the user a dialog.
                 try {
                     // Show the dialog by calling startResolutionForResult(),
                     // and check the result in onActivityResult().
-                    e.startResolutionForResult(
+                    exception.startResolutionForResult(
                         this@MapsActivity,
                         REQUEST_CHECK_SETTINGS
                     )
@@ -309,7 +303,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                 val place = getPlace(this, data)
                 var addressText = place.name.toString()
                 addressText += "\n" + place.address.toString()
-                Log.d("DBG",expoLat.toString() +" " + expoLon.toString())
 
                 placeMarkerOnMap(place.latLng)
             }

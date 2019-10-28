@@ -37,22 +37,8 @@ public class StorageManager {
         return sharedPrefs.getString(KEY_PREFIX_ANCHOR + shortCode, "");
     }
 
-    public void saveWithAnchorID(Activity activity, String cloudAnchorId){
-        SharedPreferences sharedPrefs = activity.getPreferences(Context.MODE_PRIVATE);
-        sharedPrefs.edit().putString(KEY_PREFIX_ANCHOR + cloudAnchorId , cloudAnchorId).apply();
-    }
-
-    public String resolveWithCloudAnchorId(Activity activity, String cloudAnchorId) {
-        SharedPreferences sharedPrefs = activity.getPreferences(Context.MODE_PRIVATE);
-
-        return sharedPrefs.getString(KEY_PREFIX_ANCHOR + cloudAnchorId, "");
-    }
-
     public Float generateShortCode(int expoId, int modelId){
-        Float shortCode = Float.valueOf(expoId + "." + modelId);
-        return shortCode;
+        return Float.valueOf(expoId + "." + modelId);
     }
-
-
 }
 

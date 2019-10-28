@@ -11,5 +11,4 @@ object DataManager {
     fun getExpoById(expoId: Int): Expo {
         return expoList.filter { expo -> expo.id == expoId }[0]
     }
-
 }

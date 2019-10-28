@@ -30,11 +30,6 @@ class SignUpFragment : Fragment() {
     private var username: String = ""
     private var isAdmin: Boolean= false
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -78,7 +73,6 @@ class SignUpFragment : Fragment() {
             Log.d("UUID", sharedPreferences.all.toString())
 
             isAdmin = checkIfAdmin()
-            Log.d("DBGADMIN", isAdmin.toString())
 
             // if user is admin start cloud anchor hosting navigation route
             bundle = bundleOf("isAdmin" to isAdmin)
@@ -89,10 +83,7 @@ class SignUpFragment : Fragment() {
                 usernameTextView.hideKeyboard()
                 if (isAdmin) navigateToArtList()
                 else navigateToExpoList()
-
             }
-
-
         }
     }
 

@@ -3,8 +3,6 @@ package com.dne.aart.model
 import android.content.Context
 import android.content.res.AssetManager
 import android.util.Log
-import com.dne.aart.view.TAG
-import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 import java.io.InputStream
@@ -43,7 +41,7 @@ class Database(context: Context) {
 
 
     // Read exhibitions data if available
-    fun fetchData() {
+    private fun fetchData() {
         val data = readJsonFromAssets()
         if (data != null) {
             allExpos = getAllExpos(data)
@@ -52,7 +50,7 @@ class Database(context: Context) {
     }
 
 
-    fun getAllExpos(data: JSONObject): MutableList<Expo> {
+    private fun getAllExpos(data: JSONObject): MutableList<Expo> {
         val expoArray = data.getJSONArray("all_expos")
         val expoList = mutableListOf<Expo>()
         for (index in 0 until expoArray.length()) {
@@ -63,7 +61,7 @@ class Database(context: Context) {
         return expoList
     }
 
-    fun getAllModels(data: JSONObject): MutableList<Model> {
+    private fun getAllModels(data: JSONObject): MutableList<Model> {
         val modelArray = data.getJSONArray("all_models")
         val modelList = mutableListOf<Model>()
         for (index in 0 until modelArray.length()) {
@@ -73,7 +71,7 @@ class Database(context: Context) {
         return modelList
     }
 
-    fun getExpo(expoObject: JSONObject): Expo {
+    private fun getExpo(expoObject: JSONObject): Expo {
         val expoId = expoObject.getInt("id") ?: 0
         val expoTitle = expoObject.getString("title") ?: "No title"
         val expoInfo = expoObject.getString("info") ?: "No info"
@@ -88,7 +86,7 @@ class Database(context: Context) {
         )
     }
 
-    fun getLocationFor(expo: JSONObject): Location {
+    private fun getLocationFor(expo: JSONObject): Location {
         val expoLocation = expo.getJSONObject("location")
         val lat = expoLocation.getDouble("lat")
         val long = expoLocation.getDouble("long")
@@ -98,7 +96,7 @@ class Database(context: Context) {
         )
     }
 
-    fun getModelListFor(expo: JSONObject): MutableList<Model> {
+    private fun getModelListFor(expo: JSONObject): MutableList<Model> {
         val expoModels = expo.getJSONArray("models")
         val expoModelList = mutableListOf<Model>()
         for (index in 0 until expoModels.length()) {
@@ -107,7 +105,7 @@ class Database(context: Context) {
         return expoModelList
     }
 
-    fun getModel(modelObject: JSONObject): Model {
+    private fun getModel(modelObject: JSONObject): Model {
         val modelId = modelObject.getInt("id")
         val modelTitle = modelObject.getString("title")
         val modelInfo = modelObject.getString("info")
@@ -127,5 +125,4 @@ class Database(context: Context) {
             cloud_anchor_id = modelCloudAnchorId
         )
     }
-    //private fun JSONArray.toMutableList(): MutableList<Any> = MutableList(length(), this::get)
 }

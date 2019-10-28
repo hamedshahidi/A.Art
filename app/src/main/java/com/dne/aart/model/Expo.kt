@@ -1,7 +1,5 @@
 package com.dne.aart.model
 
-import com.dne.aart.model.Model
-
 data class Expo(
     val id: Int,
     val image_url: String,

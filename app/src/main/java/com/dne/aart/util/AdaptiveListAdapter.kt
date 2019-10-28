@@ -29,7 +29,6 @@ class AdoptiveListAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val layoutInflater = LayoutInflater.from(parent.context)
 
-
         val cellRow = if (expoId == null) {
             layoutInflater.inflate(R.layout.list_item_expo, parent, false)
                     as LinearLayout
@@ -106,16 +105,12 @@ class AdoptiveListAdapter(
             expo.image_url, "drawable", context.packageName
         )
         view.imgv_expo.setImageResource(imgId)
-        //val imgPath = Uri.parse("android.resource://com.dne.aart/drawable/" + expo.image_url)
-        //view.imgv_expo.setImageURI(imgPath)
         view.tv_title_expo.text = expo.title
         val expoLocation: LatLng = LatLng(expo.location.lat, expo.location.long)
         view.tv_distance_expo.text = LocationManager.getDistanceTo(expoLocation).toString() + "Km"
     }
 
     private fun populateCellWithModelData(view: View, model: Model, position: Int) {
-        Log.d(TAG, "position: $position")
-        //Log.d(TAG, "models.size: ${thisExpo.models.size}")
         view.tv_model_name.text = model.title
         view.tv_model_info.text = model.info
         val imgPath = Uri.parse(
@@ -123,11 +118,8 @@ class AdoptiveListAdapter(
                     + model.image_url
         )
         view.imgv_model.setImageURI(imgPath)
-        //val modelIdArg = model.id
     }
 }
-
-//private fun JSONArray.toMutableList(): MutableList<Any> = MutableList(length(), this::get)
 
 class Holder(val view: View) : RecyclerView.ViewHolder(view)
 

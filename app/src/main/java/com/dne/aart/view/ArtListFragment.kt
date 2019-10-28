@@ -26,10 +26,6 @@ class ArtListFragment : Fragment() {
 
     private lateinit var linearLayoutManager: LinearLayoutManager
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,7 +35,6 @@ class ArtListFragment : Fragment() {
         expoId = safeArgs.expoId
 
         isAdmin = arguments!!.getBoolean("isAdmin")
-        Log.d("DBGADMIN", "artlist admin: $isAdmin")
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_art_list, container, false)

@@ -218,11 +218,6 @@ public class CloudAnchorFragment extends ArFragment {
 
             tvInfo.setText("Cloud Anchor Hosted. Short code: " + shortCode
             + "\n Anchor ID: " + anchor.getCloudAnchorId());
-            Log.d("ANCHOR", anchor.getCloudAnchorId());
-
-            Toast.makeText(getContext(),
-                    "Cloud Anchor Hosted. Short code: " + shortCode,
-                    Toast.LENGTH_LONG).show();
 
             setNewAnchor(anchor);
 
@@ -250,7 +245,6 @@ public class CloudAnchorFragment extends ArFragment {
         if (cloudState == CloudAnchorState.SUCCESS) {
 
             tvInfo.setText("Cloud Anchor Resolved. Short code: " + shortCode);
-            Log.d("SHORTCODE", "Cloud Anchor Resolved. Short code: " + shortCode);
 
             setNewAnchor(anchor);
         } else {
@@ -298,9 +292,7 @@ public class CloudAnchorFragment extends ArFragment {
         int id;
         if (isAdmin) {
             id = Integer.valueOf(etExpoId.getText().toString());
-            Log.d("DBG", "admin/ not empty: id: " + id);
         } else id = expoId;
-        Log.d("DBG", "NOT admin/ id: " + id);
         return id;
     }
 

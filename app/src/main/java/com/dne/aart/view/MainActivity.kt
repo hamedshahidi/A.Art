@@ -1,10 +1,7 @@
 package com.dne.aart.view
 
-import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Environment
-import android.util.Log
 import android.view.View.GONE
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -14,7 +11,6 @@ import com.dne.aart.R
 import com.dne.aart.util.DataManager
 import com.dne.aart.util.LocationManager
 import kotlinx.android.synthetic.main.activity_main.*
-import java.io.File
 
 const val TAG = "DBG"
 
@@ -26,21 +22,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-
-
-
         val host: NavHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment ?: return
         val navController = host.navController
-
-        // Fills singleton with data from database
 
         LocationManager.getLastLocation(this)
 
         DataManager.expoList = Database(applicationContext).allExpos
         DataManager.allModels = Database(applicationContext).allModels
-
 
         // navigate to correct destination based on signed in status
         when (checkSignedIn()) {

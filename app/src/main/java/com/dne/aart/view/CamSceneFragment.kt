@@ -19,10 +19,6 @@ class CamSceneFragment : Fragment() {
     private var modelId = 0
     private var isAdmin: Boolean = false
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         val safeArgs: CamSceneFragmentArgs by navArgs()
